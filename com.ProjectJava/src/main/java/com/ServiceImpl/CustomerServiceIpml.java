@@ -13,6 +13,7 @@ import com.Entity.BorrowTicketsDetail;
 import com.Entity.Borrowtickets;
 import com.Entity.Customers;
 import com.Entity.Employees;
+import com.Entity.ticket;
 import com.Repository.BooksRepository;
 import com.Repository.BorrowticketDetailRepository;
 import com.Repository.BorrowticketsRepository;
@@ -23,6 +24,7 @@ import com.Request.BorrowTicketsRequest;
 import com.Response.CustomerResponse;
 import com.service.CustomerService;
 
+import ch.qos.logback.core.pattern.ConverterUtil;
 import net.minidev.json.JSONObject;
 
 @Service
@@ -66,8 +68,7 @@ public class CustomerServiceIpml implements CustomerService{
 				for(Customers customers2 :customers) {
 					CustomerResponse customerResponse= new CustomerResponse(customers2);
 					customerResponses.add(customerResponse);
-					data.put("items", customerResponses);
-					
+					data.put("items", customerResponses);	
 				}
 			}
 		} catch (Exception e) {
@@ -122,7 +123,7 @@ public class CustomerServiceIpml implements CustomerService{
 					 		Date appointment = new Date();
 							Date tagDate = customers.getTagdate();
 							Date expirationDate = customers.getExpiration_date();
-							Date appointment_date = addDays(appointment, 20);
+							Date appointment_date = addDays(appointment, 30);
 							Date borrow_date =new Date();  // now
 							long millisTag = tagDate.getTime();
 							long millisAppointment = appointment_date.getTime();
@@ -146,7 +147,7 @@ public class CustomerServiceIpml implements CustomerService{
 									int update_book = bookRepository.updateBookById(book.getOld_amount() - 1, book_id);
 								}	
 								data.put("is_success", true);
-								data.put("messge","Tao Thanh Cong Phieu Muon");
+								data.put("message","Tao Thanh Cong Phieu Muon");
 							}else {
 								data.put("is_success", false);
 								data.put("Erorr", "Số lượng Sách Đã Mượn Chưa Trả Vượt Quá Yêu Cầu");
@@ -173,13 +174,41 @@ public class CustomerServiceIpml implements CustomerService{
 	@Override
 	public JSONObject returnBook(BorrowTicketsRequest borrowTicketsRequest) {
 		JSONObject data = new JSONObject();
-		Borrowtickets borrowticket = borrowticketsRepository.getBorrowticketById(borrowTicketsRequest.getId());
-		
-		borrowticket.setReturn_date(new Date());
-		
-		borrowticketsRepository.save(borrowticket);
-		data.put("is_success", true);
-		data.put("messge","Trả sách thành công");
+		try {
+			Borrowtickets borrowticket = borrowticketsRepository.getBorrowticketById(borrowTicketsRequest.getId());
+			if(borrowticket != null) {
+				Date appointment = borrowticket.getAppointment_date();
+				Date return_date =new Date();  // now
+				long millisAppointmentDate = appointment.getTime();
+				long millisReturnDate = return_date.getTime();
+				int date = (int)((millisReturnDate- millisAppointmentDate)/(1000*60*60*24));
+				if(millisReturnDate > millisAppointmentDate) {
+					int totalMoney = date * 5000;
+					int ticket = ticketRepository.createBorrowticket(new Date(),totalMoney, borrowticket.getId());
+					if(ticket != 0) {
+						data.put("is_success", true);
+						data.put("message","Bạn Trả Sách Muộn Và Bị Phạt\t"+totalMoney);
+						return data;
+					}
+				}else {
+					BorrowTicketsDetail borrowTicketsDetail = borrowticketDetailRepository.getBorrowTicketsDetailByBorrowticketId(borrowticket.getId());
+					if(borrowTicketsDetail != null) {
+						Books book= bookRepository.getBookById(borrowTicketsDetail.getBook().getId());
+						if(book != null) {
+							borrowticket.setReturn_date(new Date());
+							book.setOld_amount(book.getOld_amount()+1);
+							borrowticket = borrowticketsRepository.save(borrowticket);
+							bookRepository.save(book);
+						}
+					}
+				}
+				data.put("is_success", true);
+				data.put("message","Trả sách thành công");		
+			}
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Có lỗi Xảy Ra");
+		}
 		return data;
 	}
 	

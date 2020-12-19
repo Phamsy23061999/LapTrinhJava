@@ -9,6 +9,8 @@ public class BookResponse {
 	private int old_amount;
 	private String image;
 	private int page_number;
+	private String author;
+	private String category;
 	private String description;
 	
 	public BookResponse() {
@@ -20,10 +22,28 @@ public class BookResponse {
 		this.book_name=books.getBook_name();
 		this.old_amount=books.getOld_amount();
 		this.image=books.getImage();
+		this.author=books.getAuthor();
+		this.category=books.getCategory();
 		this.page_number=books.getPage_number();
 		this.description=books.getDescription();
 	}
 	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public int getId() {
 		return id;
 	}

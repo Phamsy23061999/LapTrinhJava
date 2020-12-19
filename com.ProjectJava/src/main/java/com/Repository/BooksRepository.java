@@ -32,6 +32,10 @@ public interface BooksRepository extends JpaRepository<Books, Integer>{
 	@Query(nativeQuery = true,value = " DELETE FROM books WHERE books.id=?1")
 	int deleteBook(int id);
 	
-	@Query(nativeQuery = true, value= " SELECT bo.* FROM books bo where bo.book_name LIKE %:keysearch%")
+	@Query(nativeQuery = true, value= " SELECT bo.* FROM books bo where bo.book_name LIKE %:keysearch% or bo.author LIKE %:keysearch% or bo.category LIKE %:keysearch%")
 	Books getBookByBookName(@Param("keysearch") String keysearch);
+	
+	
+	
+	
 }

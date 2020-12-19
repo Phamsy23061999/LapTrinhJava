@@ -26,6 +26,8 @@ public class Books {
 	private String image;
 	private int page_number;
 	private String description;
+	private String author;
+	private String category; 
 	private Date delete_at;
 	private String note;
 	
@@ -42,7 +44,34 @@ public class Books {
 	public Books() {
 		
 	}
+	
 
+
+	public String getAuthor() {
+		return author;
+	}
+
+
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public inventory getInven() {
+		return inven;
+	}
+
+	public void setInven(inventory inven) {
+		this.inven = inven;
+	}
 
 	public Set<BorrowTicketsDetail> getBorrowTicketsDetails() {
 		return borrowTicketsDetails;

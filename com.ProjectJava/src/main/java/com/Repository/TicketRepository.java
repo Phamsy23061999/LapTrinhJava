@@ -18,5 +18,5 @@ public interface TicketRepository extends JpaRepository<ticket, Integer>{
     @Modifying
 	@Query(nativeQuery = true, value=" INSERT INTO ticket (create_at,fine_money,borrowtickets_id) " + 
 	                                 " VALUES (?1,?2,?3)")
-	int createBorrowticket(Date create_at,double fine_money, int borrowtickets_id );
+	int createBorrowticket( Date create_at,int fine_money, int borrowtickets_id );
 }

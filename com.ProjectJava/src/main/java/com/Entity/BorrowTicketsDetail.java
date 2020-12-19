@@ -48,12 +48,15 @@ public class BorrowTicketsDetail {
 	public void setBorrowtickets(Borrowtickets borrowtickets) {
 		this.borrowtickets = borrowtickets;
 	}
-	public Books getBooks() {
+	
+	public Books getBook() {
 		return books;
 	}
-	public void setBooks(Books books) {
-		this.books = books;
+
+	public void setBook(Books book) {
+		this.books = book;
 	}
+
 	public int getId() {
 		return id;
 	}
