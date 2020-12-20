@@ -30,8 +30,8 @@ public class Customers {
 	private Boolean gender;
 	private String note;
 	private Date delete_at;
-	private Date tagdate;
-	private Date expiration_date;
+	private Date tagdate = new Date();
+	private Date expiration_date = addDays(tagdate, 30);
 	
 	
 	@OneToMany(mappedBy="customers")
@@ -41,6 +41,11 @@ public class Customers {
 		
 	}
 	
+	public static Date addDays(Date d, int days)
+    {
+        d.setTime(d.getTime() + days * 1000 * 60 * 60 * 24);
+        return d;
+    }
 	
 	public Set<Borrowtickets> getBorrowtickets() {
 		return borrowtickets;

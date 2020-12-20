@@ -62,7 +62,7 @@ public class CustomerServiceIpml implements CustomerService{
 	public JSONObject findAllCustomer() {
 		JSONObject data = new JSONObject();
 		try {
-			List<Customers> customers = customerRepository.findAll();
+			List<Customers> customers = customerRepository.getListCustomer();
 			List<CustomerResponse> customerResponses=new ArrayList<CustomerResponse>();
 			if(customers != null) {
 				for(Customers customers2 :customers) {
@@ -105,10 +105,7 @@ public class CustomerServiceIpml implements CustomerService{
 	@Override
 	public JSONObject borrowBook(BorrowTicketsRequest borrowtickets) {
  		JSONObject data = new JSONObject();
-//		Borrowtickets  borrowtickets2 = new Borrowtickets();
-//		borrowtickets2.setBorrow_date(new Date());
-//		borrowtickets2.setAppointment_date(addDays(new Date(), 20));
-//		borrowtickets2.setCustomers(customers);
+
  		Borrowtickets  borrowtickets2 = new Borrowtickets();
 		try {
 			Employees employees2 = employessRepository.getEmployeesById(borrowtickets.getEmployess_id());
@@ -205,6 +202,23 @@ public class CustomerServiceIpml implements CustomerService{
 				data.put("is_success", true);
 				data.put("message","Trả sách thành công");		
 			}
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Có lỗi Xảy Ra");
+		}
+		return data;
+	}
+
+	@Override
+	public JSONObject deleteCustomer(int id) {
+		JSONObject data = new JSONObject();
+		try {
+			int deleteCustomer = customerRepository.deleteCustomer(id);
+			if(deleteCustomer!=0) {
+				data.put("is_success", true);
+				data.put("message", "Delete thành công");
+			}
+			
 		} catch (Exception e) {
 			data.put("is_success", false);
 			data.put("Erorr", "Có lỗi Xảy Ra");

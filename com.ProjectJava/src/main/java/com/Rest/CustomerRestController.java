@@ -40,6 +40,11 @@ public class CustomerRestController {
 	 }
 	 
 	 @CrossOrigin(origins = "http://localhost:4200")
+	 @PostMapping("/delete-customer")
+	 public JSONObject deleteCustomer(@RequestBody int id) {
+		 return customerService.deleteCustomer(id);
+	 }
+	 
 	 @PostMapping("/borrow-ticket-book")
 	 public JSONObject borrowticketsBook(@RequestBody BorrowTicketsRequest borrowTicketsRequest) {
 		 return customerService.borrowBook(borrowTicketsRequest);
