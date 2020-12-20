@@ -12,7 +12,7 @@ export class ApiBorrowTicketService {
     this.baseURL = this.apiAppService.baseURL;
   }
   async GetBorrowTickets() {
-    return await this.http.get(this.baseURL+"/admin/customer/get-borrow-tickets").toPromise();
+    return await this.http.post(this.baseURL+"/admin/customer-management/get-borrow-tickets", {}).toPromise();
   }
 
   async UpdateBorrowTicket(req) {

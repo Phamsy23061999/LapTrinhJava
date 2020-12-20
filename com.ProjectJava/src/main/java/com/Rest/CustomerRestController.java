@@ -60,8 +60,8 @@ public class CustomerRestController {
 	 }
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/get_borrow_tickets")
-	public JSONObject getBorrowTickets() {
+	@PostMapping("/get-borrow-tickets")
+	public JSONObject getBorrowTickets(@RequestBody JSONObject obj) {
 		return customerService.getBorrowTickets();
 	}
 
