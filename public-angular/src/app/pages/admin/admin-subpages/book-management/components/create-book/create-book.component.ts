@@ -27,14 +27,10 @@ export class CreateBookComponent implements OnInit {
   createBookForm = this.fb.group({
     book_name: [''],
     author:[''],
-    supplier: [''],
     category: [''],
     page_number: [''],
-    cost_price: [''],
     retail_price: [''],
-    discount: [''],
     old_amount: [''],
-    new_amount: [''],
     description: [''],
     note: [''],
     image: ''
@@ -83,7 +79,6 @@ export class CreateBookComponent implements OnInit {
     this.createBookForm.patchValue({
       'book_name': '',
       'author': '',
-      'supplier': '',
       'category': '',
       'page_number': '',
       'cost_price': '',
@@ -98,19 +93,13 @@ export class CreateBookComponent implements OnInit {
 
   async CreateBook() {
     let book_data = this.createBookForm.value;
-    if(!book_data.book_name || !book_data.author || !book_data.supplier || !book_data.category || !book_data.cost_price || !book_data.retail_price ) {
+    if(!book_data.book_name || !book_data.author || !book_data.category) {
       toastr.error("Tạo mới sách thất bại.", "Vui lòng nhập đầy đủ thông tin sách.")
       return;
     }
     try {
-      let book_req = {
-        ...book_data,
-        category_id: book_data.category.category_id,
-        supplier_id: book_data.supplier.supplier_id,
-        author_id: book_data.author.author_id,
-      }
-      let created_book = await this.bookService.CreateBook(book_req)
-      this.router.navigateByUrl(`/admin/book-management/book-detail/${created_book.id}`);
+      let created_book = await this.bookService.CreateBook(book_data)
+      this.router.navigateByUrl(`/admin/book-management/book-list`);
       toastr.success("Tạo mới sách thành công.");
     } catch(e) {
       toastr.error("Tạo mới sách thất bại", e.msg || e.message)
@@ -121,82 +110,4 @@ export class CreateBookComponent implements OnInit {
     this.router.navigateByUrl('admin/book-management/book-list')
   }
 
-  OpenAddAuthorModal() {
-    const modal = this.modalController.create({
-      component: AddAuthorModalComponent,
-      componentProps: {
-      },
-    });
-    modal.show().then();
-    modal.onDismiss().then(async author =>  {
-      if(author) {
-        try {
-          await this.bookService.CreateAuthor(author);
-          await this.bookService.GetAuthors(this.filter);
-          toastr.success("Thêm mới tác giả thành công.")
-        } catch(e) {
-          toastr.error("Thêm mới tác giả thất bại.", e.msg || e.message)
-        }
-
-      }
-    });
-  }
-
-  OpenAddCategoryModal() {
-    // let createBookForm = this.createBookForm.value;
-    const modal = this.modalController.create({
-      component: AddCategoryModalComponent,
-      cssClass: 'modal-lg',
-      componentProps: {
-      },
-    });
-    modal.show().then();
-    modal.onDismiss().then(async category =>  {
-      if(category) {
-        try {
-          await this.bookService.CreateCategory(category);
-          await this.bookService.GetCategories(this.filter);
-          toastr.success("Thêm mới thể loại sách thành công.")
-        } catch(e) {
-          toastr.error("Thêm mới thể loại sách thất bại.", e.msg || e.message)
-        }
-
-      }
-    });
-  }
-
-  OpenAddSupplierModal() {
-    const modal = this.modalController.create({
-      component: AddSupplierModalComponent,
-      cssClass: 'modal-xl',
-      componentProps: {
-      },
-    });
-    modal.show().then();
-    modal.onDismiss().then(async supplier =>  {
-      if(supplier) {
-        try {
-          await this.bookService.CreateSupplier(supplier);
-          await this.bookService.GetSuppliers(this.filter);
-          toastr.success("Thêm mới nhà cung cấp thành công.")
-        } catch(e) {
-          toastr.error("Thêm mới nhà cung cấp thất bại.", e.msg || e.message)
-        }
-      }
-    });
-  }
-
-  async onChangeLogo(event) {
-    try{
-      let fd = new FormData();
-      fd.append('image', event.target.files[0], event.target.files[0].name)
-      let res : any = await this.http.post('http://localhost:5000/admin/book-management/upload-book-image', fd).toPromise();
-      this.createBookForm.patchValue({
-        image: res.image
-      })
-    }
-    catch(e){
-      toastr.error("Cập nhật ảnh thất bại!", e.msg || e.message)
-    }
-  }
 }

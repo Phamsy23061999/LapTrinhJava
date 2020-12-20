@@ -12,11 +12,14 @@ import org.springframework.stereotype.Repository;
 import com.Entity.Books;
 import com.Entity.Customers;
 
+import javax.transaction.Transactional;
+
 @Repository
 public interface CustomersRepository extends JpaRepository<Customers, Integer>{
 	
 	@Query(nativeQuery = true, value = " SELECT cm.* FROM customers cm WHERE cm.id=?1")
 	Customers getCustomersById(int id);
+
 	
 	@Modifying
 	@Transactional
@@ -25,4 +28,8 @@ public interface CustomersRepository extends JpaRepository<Customers, Integer>{
 	
 	@Query (nativeQuery = true, value = " SELECT cu.* FROM customers cu where cu.delete_at is null")
 	List<Customers> getListCustomer();
+
+
+
+
 }

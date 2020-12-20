@@ -17,6 +17,8 @@ import com.service.CustomerService;
 
 import net.minidev.json.JSONObject;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin/customer-management")
 public class CustomerRestController {
@@ -27,6 +29,13 @@ public class CustomerRestController {
 	 public JSONObject creatCustomer(@RequestBody Customers customers) {
 		 return customerService.createCustomer(customers);
 	 }
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/search-customers")
+	public List<Customers> searchCustomers(@RequestBody Customers customers) {
+		return customerService.searchCustomers(customers);
+	}
+
 	 @CrossOrigin(origins = "http://localhost:4200")	
 	 @GetMapping("/get-customers")
 	 public JSONObject getCustomer() {
@@ -55,4 +64,6 @@ public class CustomerRestController {
 	 public JSONObject returnBook(@RequestBody BorrowTicketsRequest borrowTicketsRequest) {
 		 return customerService.returnBook(borrowTicketsRequest);
 	 }
+
+
 }

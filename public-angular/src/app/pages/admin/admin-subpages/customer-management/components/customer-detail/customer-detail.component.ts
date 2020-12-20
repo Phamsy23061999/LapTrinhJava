@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerService } from './../../../../../../states/customer-store/customer.service';
 import { CustomerQuery } from './../../../../../../states/customer-store/customer.query';
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { ConfirmDeleteCustomerComponent } from './confirm-delete-customer/confirm-delete-customer.component';
 
 @Component({
@@ -16,6 +16,7 @@ import { ConfirmDeleteCustomerComponent } from './confirm-delete-customer/confir
   providers: [ DatePipe ]
 })
 export class CustomerDetailComponent implements OnInit {
+  @Input('customer_item') detail_customer;
   filter = {
     page : 1,
     per_page: 1000
@@ -36,9 +37,8 @@ export class CustomerDetailComponent implements OnInit {
     private datePipe: DatePipe) { }
 
     updateCustomerForm = this.fb.group({
-      customer_id: [''],
+      id: [''],
       customer_name: [''],
-      identity_id:[''],
       student_code: [''],
       last_name: [''],
       first_name: [''],
@@ -52,24 +52,22 @@ export class CustomerDetailComponent implements OnInit {
 
   async ngOnInit() {
     const customer_id = {
-      customer_id: parseInt(this.route.snapshot.params['id'])
+      id: parseInt(this.route.snapshot.params['id'])
     }
     const res = await this.customerService.SearchCustomers(customer_id);
     const detail_customer = res[0];
     this.customerService.SetDetailCustomer(detail_customer);
-    await this.SetupData()
   }
 
   async ngOnChanges() {
   }
 
-  async SetupData() {
-    await this.customerService.SearchOrdersByCustomerId({customer_id: this.customerQuery.getValue().detail_customer.customer_id})
-  }
 
   async onClickUpdateBtn() {
     if(this.isEditing) {
       let update_customer = this.updateCustomerForm.value;
+      update_customer.id = update_customer.customer_id;
+      console.log(update_customer)
       await this.customerService.UpdateCustomer(update_customer)
     } else {
       this.toggleEdit();
@@ -100,7 +98,7 @@ export class CustomerDetailComponent implements OnInit {
     modal.onDismiss().then(delete_customer => {
       if(delete_customer) {
         try {
-          this.customerService.DeleteCustomerById(delete_customer.customer_id)
+          this.customerService.DeleteCustomerById(delete_customer.id)
           this.router.navigateByUrl('admin/customer-management/customer-list')
           toastr.success("Bạn đã xóa khách hàng thành công")
         } catch(e) {
@@ -115,11 +113,11 @@ export class CustomerDetailComponent implements OnInit {
     this.updateCustomerForm.patchValue({
       'first_name' :store_detail_customer?.first_name,
       'last_name' :store_detail_customer?.last_name,
-      'customer_id': store_detail_customer?.customer_id,
+      'id': store_detail_customer?.id,
       'customer_name': store_detail_customer?.last_name + ' '+store_detail_customer?.first_name,
       'email': store_detail_customer?.email,
       'address': store_detail_customer?.address,
-      'identity_id': store_detail_customer?.identity_id,
+      'indentity_id': store_detail_customer?.indentity_id,
       'phone': store_detail_customer?.phone,
       'gender': store_detail_customer?.gender,
       'birth_date':this.datePipe.transform(store_detail_customer?.birth_day, 'yyyy-MM-dd'),
@@ -155,13 +153,10 @@ export class CustomerDetailComponent implements OnInit {
   }
   async UpdateCustomer() {
     let update_customer = this.updateCustomerForm.value;
-    let update_req = {
-      ...update_customer,
-      account_id: this.customerStore.getValue().detail_customer.account.account_id,
-      gender: update_customer.gender == 'true' ? true : false,
-    };
+    update_customer.gender = update_customer.gender == 'true' ? true : false;
+    console.log(update_customer)
     try{
-      let updated_customer = await this.customerService.UpdateCustomer(update_req) 
+      let updated_customer = await this.customerService.UpdateCustomer(update_customer) 
       this.customerStore.update({detail_customer: updated_customer})
       toastr.success("Cập nhật sách thành công.")
       this.router.navigateByUrl('admin/customer-management/customer-list')

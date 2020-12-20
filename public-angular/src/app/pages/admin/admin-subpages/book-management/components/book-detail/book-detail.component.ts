@@ -206,14 +206,9 @@ export class BookDetailComponent implements OnInit, OnChanges {
   }
   async UpdateBook() {
     let update_book = this.updateBookForm.value;
-    let update_req = {
-      ...update_book,
-      category_id: update_book.category.category_id,
-      supplier_id: update_book.supplier.supplier_id,
-      author_id: update_book.author.author_id,
-    };
+
     try{
-      let updated_book = await this.bookService.UpdateBook(update_req)
+      let updated_book = await this.bookService.UpdateBook(update_book)
       this.bookStore.update({detail_book: updated_book})
       toastr.success("Cập nhật sách thành công.")
       this.router.navigateByUrl('admin/book-management/book-list')

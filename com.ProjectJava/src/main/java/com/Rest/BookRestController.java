@@ -26,13 +26,19 @@ public class BookRestController {
 	public JSONObject createBook(@RequestBody Books book) {
 		return  bookService.createBook(book);
 	}
-	
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/get-books")
 	public JSONObject getBook() {
-		return  bookService.findAllBook();
+		return bookService.findAllBook();
 	}
-	
+
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@GetMapping("/get-books")
+//	public JSONObject searchBooks(@RequestBody Books searchBookRequest) {
+//		return bookService.searchBooks(searchBookRequest);
+//	}
+
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/get-books-by-id-and-book-name")
 	public JSONObject getBookByIdAndBookName(BookRequest bookRequest) {
@@ -46,9 +52,15 @@ public class BookRestController {
 	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("/delete-book")
-	public JSONObject deleteBook(int id) {
+	@PostMapping("/delete-book")
+	public JSONObject deleteBook(@RequestBody int id) {
+		System.out.print("delete na"+  id);
 		return   bookService.deleteBook(id);
 	}
 
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/search-books")
+	public JSONObject searchBookByKeywords(@RequestBody Books book) {
+		return bookService.searchBooksByKeywords(book);
+	}
 }

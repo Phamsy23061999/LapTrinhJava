@@ -24,7 +24,7 @@ export class ApiBookService {
   }
 
   async SearchBooks(req) {
-    return await this.http.post(this.baseURL+"/admin/book-management/search-books",req).toPromise();
+    return await this.http.post(this.baseURL+"/admin/book-management/search-books",req).toPromise().then(res => res.items);
   }
 
   async DeleteBook(req) {

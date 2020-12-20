@@ -210,6 +210,14 @@ public class CustomerServiceIpml implements CustomerService{
 	}
 
 	@Override
+	public List<Customers> searchCustomers(Customers cus) {
+		ArrayList<Customers> res = new ArrayList<>();
+		Customers customer = customerRepository.getCustomersById(cus.getId());
+		res.add(customer);
+		return res;
+	}
+
+	@Override
 	public JSONObject deleteCustomer(int id) {
 		JSONObject data = new JSONObject();
 		try {
@@ -218,7 +226,6 @@ public class CustomerServiceIpml implements CustomerService{
 				data.put("is_success", true);
 				data.put("message", "Delete thành công");
 			}
-			
 		} catch (Exception e) {
 			data.put("is_success", false);
 			data.put("Erorr", "Có lỗi Xảy Ra");
@@ -227,4 +234,5 @@ public class CustomerServiceIpml implements CustomerService{
 	}
 	
 
+		
 }

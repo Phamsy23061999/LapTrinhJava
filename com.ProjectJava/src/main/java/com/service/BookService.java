@@ -15,4 +15,5 @@ public interface BookService {
 	public JSONObject findAllBook();
 	public JSONObject deleteBook(int id);
 	public JSONObject getBookByIdAndBookName(BookRequest bookRequest);
+	public JSONObject searchBooksByKeywords(Books book);
 }

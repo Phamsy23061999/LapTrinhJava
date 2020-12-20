@@ -62,7 +62,7 @@ export class CustomerService {
     }
 
     async DeleteCustomerById(id) {
-        return await this.customerApiService.DeleteCustomer({customer_id: id});
+        return await this.customerApiService.DeleteCustomer(id);
     }
 
     async UpdateCustomer(customer) {
