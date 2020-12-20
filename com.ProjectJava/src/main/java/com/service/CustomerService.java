@@ -10,6 +10,8 @@ import com.Request.CustomerRequest;
 
 import net.minidev.json.JSONObject;
 
+import java.util.List;
+
 @Component
 public interface CustomerService {
 	public JSONObject createCustomer(Customers customers);
@@ -17,5 +19,6 @@ public interface CustomerService {
 	public JSONObject updateCustomer(Customers customers);
 	public JSONObject borrowBook(BorrowTicketsRequest borrowTicketsRequest);
 	public JSONObject returnBook(BorrowTicketsRequest borrowTicketsRequest);
-
+	public List<Customers> searchCustomers(Customers cus);
+	public JSONObject deleteCustomer(int id);
 }

@@ -7,22 +7,18 @@
       <div class="avatar col-3 mb-4">
         <div class="d-flex flex-column">
           <img src='assets/images/default-book.png' style="height: 100%; width: 100%; object-fit: cover;" alt="Avatar" />
-          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã khách hàng: {{(detail_customer$ | async)?.customer_id | standardizedId}}</h1>
+          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã khách hàng: {{(detail_customer$ | async)?.id | standardizedId}}</h1>
         </div>
       </div>
       <div class=" col-9 d-flex flex-column">
         <div class="d-flex flex-column">
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Mã khách hàng: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_customer$ | async)?.customer_id | standardizedId ) || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{((detail_customer$ | async)?.id | standardizedId ) || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Tên khách hàng: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{(detail_customer$ | async)?.last_name + ' ' + (detail_customer$ | async)?.first_name || '-'}}</div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 text-center font-weight-bold"><b>Chứng minh thư: </b></div>
-            <div class="col-9">{{(detail_customer$ | async)?.identity_id || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{(detail_customer$ | async)?.last_name + ' sadsa' + (detail_customer$ | async)?.first_name || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Email: </b></div>
@@ -102,13 +98,6 @@
             <div class="col-2 app-flex"><b>Tên: </b></div>
             <div class="col-9">
               <input type="text" class="form-control" placeholder="Nhập tên" formControlName="first_name"
-              />
-            </div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 app-flex"><b>Chứng minh thư: </b></div>
-            <div class="col-9">
-              <input type="text" class="form-control" placeholder="Nhập chứng minh thư" formControlName="identity_id"
               />
             </div>
           </div>

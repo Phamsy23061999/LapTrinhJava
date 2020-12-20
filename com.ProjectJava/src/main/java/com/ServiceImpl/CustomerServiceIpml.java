@@ -211,6 +211,30 @@ public class CustomerServiceIpml implements CustomerService{
 		}
 		return data;
 	}
-	
+
+	@Override
+	public List<Customers> searchCustomers(Customers cus) {
+		ArrayList<Customers> res = new ArrayList<>();
+		Customers customer = customerRepository.getCustomersById(cus.getId());
+		res.add(customer);
+		return res;
+	}
+
+	@Override
+	public JSONObject deleteCustomer(int id) {
+		JSONObject data = new JSONObject();
+		try {
+			int deleteCustomer = customerRepository.deleteCustomer(id);
+			if(deleteCustomer!=0) {
+				data.put("is_success", true);
+				data.put("message", "Delete thành công");
+			}
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Không tìm thấy thông tin khachs hang");
+		}
+		return data;
+	}
+
 
 }

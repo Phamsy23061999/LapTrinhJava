@@ -16,10 +16,8 @@
         </div>
       </div>
       <ng-container *ngFor="let customer_item of (customer_list$ | async)?.items.slice().reverse(), let i = index">
-        <app-customer-row [customer_item]="customer_item" [index]="i" (click)="onViewCustomerDetail(customer_item.customer_id)"></app-customer-row>
+        <app-customer-row [customer_item]="customer_item" [index]="i" (click)="onViewCustomerDetail(customer_item.id)"></app-customer-row>
       </ng-container>
-      <app-page-pagination class="mt-auto" (navigate)="navigate($event)" [paginationOpt]="current_pagination_opt$" [currentPage]="current_page$ | async">
-      </app-page-pagination>
     </div>
   </ng-template>
 </app-item-table>
