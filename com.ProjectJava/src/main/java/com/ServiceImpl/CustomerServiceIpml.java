@@ -21,6 +21,8 @@ import com.Repository.CustomersRepository;
 import com.Repository.EmployessRepository;
 import com.Repository.TicketRepository;
 import com.Request.BorrowTicketsRequest;
+import com.Response.BookResponse;
+import com.Response.BorrowticketResponse;
 import com.Response.CustomerResponse;
 import com.service.CustomerService;
 
@@ -218,8 +220,32 @@ public class CustomerServiceIpml implements CustomerService{
 	@Override
 	public JSONObject getBorrowTickets() {
 		JSONObject data = new JSONObject();
-		List<Borrowtickets>  borrowTickets = borrowticketsRepository.getBorrowtickets();
-		data.put("items", borrowTickets);
+		try {
+			List<Borrowtickets> borrowTickets = borrowticketsRepository.getListBorrowtickets();
+			List<BorrowticketResponse> borrowTicketsResponse = new ArrayList<BorrowticketResponse>();
+			
+			if(borrowTickets != null) {
+				for(Borrowtickets borrow : borrowTickets) {
+					BorrowticketResponse borrowticketResponse = new BorrowticketResponse(borrow);
+					Employees employees = employessRepository.getEmployeesById(borrow.getEmployess().getId());
+					if(employees != null) {
+						borrowticketResponse.setEmployess_id(employees.getId());
+						borrowticketResponse.setEmployess_name(employees.getFirst_name());
+					}
+					Customers customers = customerRepository.getCustomersById(borrow.getCustomers().getId());
+					if(customers != null) {
+						borrowticketResponse.setCustomers_id(customers.getId());
+						borrowticketResponse.setCustomers_name(customers.getFirst_name());
+					}
+					borrowTicketsResponse.add(borrowticketResponse);
+					data.put("item", borrowTicketsResponse);
+				}
+				
+			}	
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Có lỗi Xảy Ra");
+		}
 		return data;
 	}
 
