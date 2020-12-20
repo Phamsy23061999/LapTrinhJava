@@ -2,6 +2,7 @@ package com.ServiceImpl;
 
 import java.awt.print.Book;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,25 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
+	public JSONObject searchBooksByKeywords(Books book) {
+		JSONObject data = new JSONObject();
+		try {
+			List<Books> searchBooks = bookRepository.searchBooksByKeywords(book.getBook_name(), book.getCategory(), book.getAuthor());
+			System.out.print( "books: " + searchBooks);
+			if(searchBooks.size() !=0) {
+				data.put("items", searchBooks);
+			} else {
+				data.put("is_success", false);
+				data.put("msg", "Không tìm thấy thông tin sách");
+			}
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Không tìm thấy thông tin sách");
+		}
+		return data;
+	}
+
+	@Override
 	public JSONObject getBookByIdAndBookName(BookRequest bookRequest) {
 		JSONObject data = new JSONObject();
 		try {
@@ -120,9 +140,4 @@ public class BookServiceImpl implements BookService{
 		}
 		return data;
 	}
-
-	
-	
-	
-
 }

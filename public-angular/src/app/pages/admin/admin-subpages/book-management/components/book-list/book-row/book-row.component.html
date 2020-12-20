@@ -6,6 +6,8 @@
            style="height: 80px; width: 60px; object-fit: cover;" alt="" />
     </div>
     <div class="col align-self-center text-center text-app "><b>{{book_item?.book_name || "-"}}</b></div>
+    <div class="col align-self-center text-center  "><b>{{book_item?.author || "-"}}</b></div>
+    <div class="col align-self-center text-center  "><b>{{book_item?.category || "-"}}</b></div>
     <div class="col align-self-center text-center" style="max-width: 200px;">{{book_item?.old_amount|| "-"}}</div>
     <div class="col align-self-center text-center" style="max-width: 200px;">{{book_item?.page_number|| "-"}}</div>
   </div>

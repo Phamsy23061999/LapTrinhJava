@@ -62,7 +62,7 @@ export class BookService {
     }
 
     async DeleteBookById(id) {
-        return await this.bookApiService.DeleteBook({id: id});
+        return await this.bookApiService.DeleteBook(id);
     }
 
     async UpdateBook(book) {

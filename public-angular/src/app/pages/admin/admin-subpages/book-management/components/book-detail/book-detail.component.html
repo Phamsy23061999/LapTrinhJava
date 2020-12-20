@@ -30,15 +30,12 @@
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Tác giả: </b></div>
-            <div class="col-9">{{(detail_book$ | async)?.author?.author_name || '-'}}</div>
+            <div class="col-9">{{(detail_book$ | async)?.author || '-'}}</div>
           </div>
-          <div class="row py-3">
-            <div class="col-2 text-center font-weight-bold"><b>Nhà cung cấp: </b></div>
-            <div class="col-9">{{(detail_book$ | async)?.supplier?.contact_name || "-"}}</div>
-          </div>
+
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Thể loại: </b></div>
-            <div class="col-9">{{(detail_book$ | async)?.category?.category_name || '-'}}</div>
+            <div class="col-9">{{(detail_book$ | async)?.category || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Số trang: </b></div>
@@ -128,49 +125,14 @@
           <div class="row py-3">
             <div class="col-2 app-flex"><b>Tác giả: </b></div>
             <div class="col-9">
-              <div class="btn-add px-3 py-2" (click)="OpenAddAuthorModal()">
-                <i class="fa fa-plus"></i>
-              </div>
-              <select class="w3-select w3-border form-control pl-1" name="author" formControlName="author">
-                  <option value="" disabled>Vui lòng chọn tác giả
-                  </option>
-                  <option
-                  *ngFor="let auth of authors$ | async" [ngValue]="auth" class="font-weight-bold" [selected]="auth.author_id == 1"
-                  >
-                    {{auth?.author_name}}
-                  </option>
-              </select>
+              <input type="text" class="form-control" placeholder="Nhập tác giả" formControlName="author"/>
             </div>
           </div>
-          <div class="row py-3">
-            <div class="col-2 app-flex"><b>Nhà cung cấp: </b></div>
-            <div class="col-9">
-              <div class="btn-add px-3 py-2" (click)="OpenAddSupplierModal()">
-                <i class="fa fa-plus"></i>
-              </div>
-              <select class="w3-select w3-border form-control pl-1" name="supplier" formControlName="supplier"  >
-                  <option *ngFor="let supplier of suppliers$ | async" [ngValue]="supplier" class="font-weight-bold" [selected]="supplier.supplier_id == book_detail_in_store ">
-                    {{supplier?.contact_name || "Tên liên lạc"}} - {{supplier?.phone || "Số điện thoại"}} - {{supplier?.email || "email"}}
-                  </option>
-              </select>
-            </div>
-          </div>
+    
           <div class="row py-3">
             <div class="col-2 app-flex"><b>Thể loại: </b></div>
             <div class="col-9">
-              <div class="btn-add px-3 py-2" (click)="OpenAddCategoryModal()">
-                <i class="fa fa-plus"></i>
-              </div>
-              <select class="w3-select w3-border form-control pl-1" name="category" formControlName="category"  >
-                  <option value="" disabled selected>Vui lòng chọn thể loại sách
-                  </option>
-                  <option *ngFor="let category of categories$ | async" [ngValue]="category" class="font-weight-bold">
-                    {{category?.category_name}}
-                    <div class=" px-3 py-2">
-                      <i class="fa fa-plus"></i>
-                    </div>
-                  </option>
-              </select>
+              <input type="text" class="form-control" placeholder="Nhập tác giả" formControlName="category"/>
             </div>
           </div>
           <div class="row py-3">
@@ -178,28 +140,6 @@
             <div class="col-9">
               <input type="number" class="form-control" placeholder="Nhập số trang"
               formControlName="page_number"
-              />
-            </div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 app-flex"><b>Giá vốn: </b></div>
-            <div class="col-9">
-              <input type="number" class="form-control" placeholder="Nhập giá vốn "  formControlName="cost_price"
-              />
-            </div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 app-flex"><b>Giá bán: </b></div>
-            <div class="col-9">
-              <input type="number" class="form-control" placeholder="Nhập giá bán"  formControlName="retail_price"
-              />
-            </div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 app-flex"><b>Giảm giá (%): </b></div>
-            <div class="col-9">
-              <input type="number" class="form-control" placeholder="Nhập giá trị giảm giá"
-              formControlName="discount"
               />
             </div>
           </div>

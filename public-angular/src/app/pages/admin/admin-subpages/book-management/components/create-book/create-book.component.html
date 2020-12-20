@@ -15,7 +15,7 @@
             <div class="upload-loading m-0 p-0">
               <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
             </div>
-            <input accept="image/png,image/jpg,image/jpeg,image/gif" name = "file"  class="d-none" type="file" (change)="onChangeLogo($event)"/>
+            <input accept="image/png,image/jpg,image/jpeg,image/gif" name = "file"  class="d-none" type="file"/>
           </label>
         </div>
         <h1 class="text-app text-center font-weight-bold">Tải ảnh bìa</h1>
@@ -38,16 +38,9 @@
             </div>
         </div>
         <div class="row py-3">
-          <div class="col-2 app-flex"><b>Nhà cung cấp: </b></div>
-            <div class="col-9">
-              <input type="text" class="form-control" placeholder="Nhập nhà cung cấp" formControlName="author"
-              />
-            </div>
-        </div>
-        <div class="row py-3">
           <div class="col-2 app-flex"><b>Thể loại: </b></div>
             <div class="col-9">
-              <input type="text" class="form-control" placeholder="Nhập thể loại" formControlName="author"
+              <input type="text" class="form-control" placeholder="Nhập thể loại" formControlName="category"
               />
             </div>
         </div>

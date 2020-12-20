@@ -15,8 +15,9 @@ export class BookListComponent implements OnInit {
   current_pagination_opt$ = this.bookQuery.current_pagination_opt$;
   current_page$ = this.bookQuery.current_page$;
 
-  searchKeyword = '';
-
+  book_name = '';
+  author ='';
+  category='';
   constructor(private router: Router, private bookService: BookService, private bookQuery: BookQuery, private bookStore: BookStore, private ref: ChangeDetectorRef) { }
 
   async ngOnInit() {
@@ -30,21 +31,20 @@ export class BookListComponent implements OnInit {
   }
 
   async SearchBooks() {
-    if(!this.searchKeyword) {
+    if(!this.book_name && !this.book_name && !this.category) {
       await this.onRequestNewPage();
     }
     const req = {
-      book_name: this.searchKeyword,
+      book_name: this.book_name,
+      author: this.author,
+      category: this.category,
     }
     let books = await this.bookService.searchBooks(req);
     let book_view = this.bookStore.getValue().book_list_view;
-    if(books.books.length) {
+    if(books.length) {
       this.bookStore.update({
         book_list_view: {...book_view,
-          items: books.books,
-          has_next: false,
-          has_prev: false,
-          current_page: 1
+          items: books,
         },
       })
     }
