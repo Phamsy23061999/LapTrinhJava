@@ -18,6 +18,9 @@ public interface BorrowticketsRepository extends JpaRepository<Borrowtickets, In
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.id=?1")
 	Borrowtickets getBorrowticketById(int id);
 
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.delete_at is null")
+	List<Borrowtickets> getBorrowtickets();
+
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.customers_id=?1")
 	Borrowtickets getBorrowticketByCustomerId(int customers_id);
 	

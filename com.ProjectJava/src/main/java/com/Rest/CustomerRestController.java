@@ -53,7 +53,13 @@ public class CustomerRestController {
 	 public JSONObject borrowticketsBook(@RequestBody BorrowTicketsRequest borrowTicketsRequest) {
 		 return customerService.borrowBook(borrowTicketsRequest);
 	 }
-	 
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/get_borrow_tickets")
+	public JSONObject getBorrowTickets() {
+		return customerService.getBorrowTickets();
+	}
+
 	 @CrossOrigin(origins = "http://localhost:4200")
 	 @PostMapping("/return-book")
 	 public JSONObject returnBook(@RequestBody BorrowTicketsRequest borrowTicketsRequest) {
