@@ -17,10 +17,11 @@ public interface CustomerService {
 	public JSONObject createCustomer(Customers customers);
 	public JSONObject findAllCustomer();
 	public JSONObject updateCustomer(Customers customers);
+	public JSONObject deleteCustomer(int id);
 	public JSONObject borrowBook(BorrowTicketsRequest borrowTicketsRequest);
 	public JSONObject returnBook(BorrowTicketsRequest borrowTicketsRequest);
 	public JSONObject getBorrowTickets();
 
 	public List<Customers> searchCustomers(Customers cus);
-	public JSONObject deleteCustomer(int id);
+
 }

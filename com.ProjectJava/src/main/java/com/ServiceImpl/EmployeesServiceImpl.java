@@ -1,6 +1,7 @@
 package com.ServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,8 +90,49 @@ public class EmployeesServiceImpl implements EmployeesService{
 		}
 		return data;
 	}
+
+	@Override
+	public JSONObject annualStatistics(int year) {
+		JSONObject data = new JSONObject();
+		
+		try {
+			int statisticalYear = employeesRepository.statisticalYear(year);
+			if(statisticalYear !=0) {
+				data.put("is_success",true);
+				data.put("message", "Thống Kê Theo Năm Có"+" "+statisticalYear+" "+"Khách Hàng Mượn Sách");
+			}
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Error","Có Lỗi Xảy Ra");
+		}
+		return data;
+	}
+
 	
+	@Override
+	public JSONObject quarterlyStatistics(int quarterlyLevel) {
+		JSONObject data = new JSONObject();
+		JSONObject js = new JSONObject();
+		int quarterlyStatistics = 0;
+		List<JSONObject> Statistics_by_year = new ArrayList<JSONObject>();
+		List<Integer>month = new ArrayList<Integer>();
+		List<JSONObject> Statistics_by_quarterly = new ArrayList<JSONObject>();
+		int year = Calendar.getInstance().get(Calendar.YEAR);
 	
-	
+		try {
+				quarterlyStatistics = employeesRepository.statisticalYear(year);
+				data.put("label","Statistics_by_year");
+				data.put("value",quarterlyStatistics);
+				Statistics_by_year.add(data);
+				js.put("Statistics_by_year", Statistics_by_year);
+				return js;
+			
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Error","Không Có Khách Hàng Nào Mượn Sách Vào Quý"+" "+quarterlyLevel);
+		}
+		return data;
+	}
+
 
 }

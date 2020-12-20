@@ -49,6 +49,12 @@ public class CustomerRestController {
 	 }
 	 
 	 @CrossOrigin(origins = "http://localhost:4200")
+	 @PostMapping("/delete-customer")
+	 public JSONObject deleteCustomer(@RequestBody int id) {
+		 return customerService.deleteCustomer(id);
+	 }
+
+	@CrossOrigin(origins = "http://localhost:4200")
 	 @PostMapping("/borrow-ticket-book")
 	 public JSONObject borrowticketsBook(@RequestBody BorrowTicketsRequest borrowTicketsRequest) {
 		 return customerService.borrowBook(borrowTicketsRequest);
@@ -66,10 +72,5 @@ public class CustomerRestController {
 		 return customerService.returnBook(borrowTicketsRequest);
 	 }
 
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/delete-customer")
-	public JSONObject deleteCustomer(@RequestBody int id) {
-		System.out.print("delete na"+  id);
-		return   customerService.deleteCustomer(id);
-	}
+
 }

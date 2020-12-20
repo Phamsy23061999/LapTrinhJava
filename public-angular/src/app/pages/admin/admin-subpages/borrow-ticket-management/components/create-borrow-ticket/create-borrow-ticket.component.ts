@@ -71,7 +71,7 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-    this.employee_id = JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id;
+    // this.employee_id = JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id;
 
     await this.customerService.GetCustomers();
     await this.bookService.getBooks();
@@ -92,16 +92,16 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
       })
     );
 
-
+    console.log(this.all_customers)
     this.all_customers.forEach(customer => {
-      this.customer_options.push(customer.customer_id.toString());
+      this.customer_options.push(customer.id.toString());
     })
     this.customer_filtered_options = this.customer_control.valueChanges.pipe(
       startWith(''),
       map(value => this._customerFilter(value)),
       tap(() => {
         if(parseInt(this.customer_control.value)){
-          this.customer_item = this.all_customers.find(customer => customer.customer_id == parseInt(this.customer_control.value))
+          this.customer_item = this.all_customers.find(customer => customer.id == parseInt(this.customer_control.value))
         }
       })
     );
@@ -155,8 +155,9 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
         return toastr.error("Tạo phiếu mượn sách không thành công", "Vui lòng chọn sách mượn");
       }
       const api_req = {
-        customer_id: this.customer_item.customer_id,
-        employee_id:  JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id,
+        customer_id: this.customer_item.id,
+        // employee_id:  JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id,
+        employee_id:  parseInt(this.employee_id),
         borrow_ids: req_ids
       }
       const res = await this.borrowTicketService.CreateBorrowTicket(api_req);
