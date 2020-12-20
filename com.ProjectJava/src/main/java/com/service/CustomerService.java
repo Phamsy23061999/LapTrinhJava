@@ -19,6 +19,8 @@ public interface CustomerService {
 	public JSONObject updateCustomer(Customers customers);
 	public JSONObject borrowBook(BorrowTicketsRequest borrowTicketsRequest);
 	public JSONObject returnBook(BorrowTicketsRequest borrowTicketsRequest);
+	public JSONObject getBorrowTickets();
+
 	public List<Customers> searchCustomers(Customers cus);
 	public JSONObject deleteCustomer(int id);
 }

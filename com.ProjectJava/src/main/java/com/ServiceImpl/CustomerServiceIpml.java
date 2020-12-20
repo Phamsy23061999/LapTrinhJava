@@ -46,6 +46,8 @@ public class CustomerServiceIpml implements CustomerService{
 	public JSONObject createCustomer(Customers customers) {
 		JSONObject data = new JSONObject();
 		try {
+			customers.setTagdate(new Date());
+			customers.setExpiration_date(addDays(new Date(), 365));
 			Customers customers2 = customerRepository.saveAndFlush(customers);
 			if(customers2 != null) {
 				CustomerResponse customerResponse = new CustomerResponse(customers2);
@@ -119,20 +121,23 @@ public class CustomerServiceIpml implements CustomerService{
 					 data.put("message", "Khach hàng này đang mượn 1 phiếu mượn khác.");
 					 return data;
 				 }
+//				System.out.print("emp != null na");
 				 if(customers != null) {
-					 		Date appointment = new Date();
-							Date tagDate = customers.getTagdate();
-							Date expirationDate = customers.getExpiration_date();
-							Date appointment_date = addDays(appointment, 30);
-							Date borrow_date =new Date();  // now
-							long millisTag = tagDate.getTime();
-							long millisAppointment = appointment_date.getTime();
-							long miliBorrowDate = borrow_date.getTime();
-							long miilisExpiration =expirationDate.getTime();
-							int date = (int)((miilisExpiration- millisTag)/(1000*60*60*24));
-							int borrowDate =(int)((millisAppointment - miliBorrowDate)/(1000*60*60*24));
-		
-							borrowtickets2.setBorrow_date(new Date());
+//					 System.out.print("cuss != null na")
+					 Date appointment = new Date();
+					 Date tagDate = customers.getTagdate();// tạo tag date cho customer là chạy vù vù
+					 Date expirationDate = customers.getExpiration_date();
+					 Date appointment_date = addDays(appointment, 30);
+					 Date borrow_date =new Date();  // now
+					 long millisTag = tagDate.getTime();
+					 long millisAppointment = appointment_date.getTime();
+					 long miliBorrowDate = borrow_date.getTime();
+					 long miilisExpiration =expirationDate.getTime();
+					 int date = (int)((miilisExpiration- millisTag)/(1000*60*60*24));
+					 int borrowDate =(int)((millisAppointment - miliBorrowDate)/(1000*60*60*24));
+
+
+					 borrowtickets2.setBorrow_date(new Date());
 							borrowtickets2.setAppointment_date(addDays(new Date(), 30));
 							borrowtickets2.setQuantity(borrowtickets.getBook_ids().size());
 							borrowtickets2.setCustomers(customers);
@@ -151,7 +156,8 @@ public class CustomerServiceIpml implements CustomerService{
 							}else {
 								data.put("is_success", false);
 								data.put("Erorr", "Số lượng Sách Đã Mượn Chưa Trả Vượt Quá Yêu Cầu");
-							}	
+							}
+							System.out.println("out na");
 						}	
 				 }else {
 					 data.put("is_success", false);
@@ -209,6 +215,15 @@ public class CustomerServiceIpml implements CustomerService{
 			data.put("is_success", false);
 			data.put("Erorr", "Có lỗi Xảy Ra");
 		}
+		return data;
+	}
+
+	@Override
+	public JSONObject getBorrowTickets() {
+		JSONObject data = new JSONObject();
+		List<Borrowtickets>  borrowTickets = borrowticketsRepository.getBorrowtickets();
+		System.out.print(borrowTickets);
+		data.put("items", borrowTickets);
 		return data;
 	}
 
