@@ -57,12 +57,11 @@ public class BookServiceImpl implements BookService{
 		}
 		return data;
 	}
-
 	@Override
 	public JSONObject findAllBook() {
 		JSONObject data = new JSONObject();
 		try {
-			List<Books> books = bookRepository.findAll();
+			List<Books> books = bookRepository.getListBook();
 			List<BookResponse>bookResponses = new ArrayList<BookResponse>();
 			if(books != null) {
 				for(Books books2 : books) {
@@ -77,7 +76,6 @@ public class BookServiceImpl implements BookService{
 		}
 		return data;
 	}
-
 	@Override
 	public JSONObject deleteBook(int id) {
 		JSONObject data = new JSONObject();
@@ -93,7 +91,6 @@ public class BookServiceImpl implements BookService{
 		}
 		return data;
 	}
-
 	@Override
 	public JSONObject searchBooksByKeywords(Books book) {
 		JSONObject data = new JSONObject();
@@ -140,4 +137,5 @@ public class BookServiceImpl implements BookService{
 		}
 		return data;
 	}
+
 }
