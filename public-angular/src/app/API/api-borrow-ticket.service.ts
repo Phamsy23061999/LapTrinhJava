@@ -11,8 +11,8 @@ export class ApiBorrowTicketService {
   constructor(private http: HttpService, private apiAppService: ApiAppService) {
     this.baseURL = this.apiAppService.baseURL;
   }
-  async GetBorrowTickets(req) {
-    return await this.http.post(this.baseURL+"/admin/borrow-ticket-management/get-borrow-tickets",req).toPromise();
+  async GetBorrowTickets() {
+    return await this.http.get(this.baseURL+"/admin/customer/get-borrow-tickets").toPromise();
   }
 
   async UpdateBorrowTicket(req) {
