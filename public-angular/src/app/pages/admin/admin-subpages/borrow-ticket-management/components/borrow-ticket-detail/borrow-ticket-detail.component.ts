@@ -20,10 +20,10 @@ export class BorrowTicketDetailComponent implements OnInit, OnChanges {
     page : 1,
     per_page: 1000
   }
-
+  borrow_ticket_item;
   borrow_status: any =  "Hoàn thành"  || "Trả trễ" || "Đang trễ" || "Đang mượn";
   isEditing = false;
-  detail_borrow_ticket$ = this.borrowTicketQuery.detail_borrow_ticket$;
+  // detail_borrow_ticket$ = this.borrowTicketQuery.detail_borrow_ticket$;
   isSendEmail = false;
 
   constructor(
@@ -54,19 +54,14 @@ export class BorrowTicketDetailComponent implements OnInit, OnChanges {
 
   async ngOnInit() {
     await this.SetupData()
+    this.borrow_ticket_item = this.borrowTicketQuery.getValue().detail_borrow_ticket;
+    console.log(this.borrow_ticket_item)
   }
 
   async ngOnChanges() {
   }
 
   async SetupData() {
-    const borrow_ticket_id = {
-      borrow_ticket_id: parseInt(this.route.snapshot.params['id'])
-    }
-    const res = await this.borrowTicketService.searchBorrowTickets(borrow_ticket_id);
-    const detail_borrow_ticket = res.borrow_tickets[0];
-
-    this.borrowTicketService.setDetailBorrowTicket(detail_borrow_ticket);
 
     const current_date = new Date().getTime();
     const return_date = new Date(this.borrowTicketQuery.getValue().detail_borrow_ticket.return_date).getTime();
@@ -164,7 +159,7 @@ export class BorrowTicketDetailComponent implements OnInit, OnChanges {
       const modal = this.modalController.create({
         component: ConfirmFinishBorrowTicketModalComponent,
         componentProps: {
-          borrow_ticket_id: this.borrowTicketQuery.getValue().detail_borrow_ticket.borrow_ticket_id
+          borrow_ticket_id: this.borrowTicketQuery.getValue().detail_borrow_ticket.id
         },
       });
       modal.show().then();

@@ -24,7 +24,12 @@
               </form>
             </div>
           </div>
-
+          <div class="row app-flex flex-row my-3">
+            <div class="col-2 detail-title font-weight-bold text-app">Mã nhân viên: </div>
+            <div class="col-10 detail-info d-flex justify-content-center">
+              <input type="text" class="form-control text-app font-weight-bold"  placeholder="Nhập ma nhan vien" name="inputField" [(ngModel)]="employee_id" />
+            </div>
+          </div>
           <div class="row" *ngIf="customer_item" style="padding-left:7rem">
             <div class="col-2 app-flex">
               <div class=" h-75" >
@@ -165,17 +170,6 @@
     </div>
   </div>
 </ng-container>
-
-
-
-
-
-
-
-
-
-
-
 
 <ng-template #confirm_borrow_ticket_view>
   <div class="app-flex flex-column text-center">

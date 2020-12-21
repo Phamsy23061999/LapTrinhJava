@@ -1,40 +1,40 @@
 <ng-container>
   <div class="d-flex justify-content-center align-items-center text-app font-weight-bold">
-    <h1 class="font-weight-bold">Thông tin chi tiết phiếu mượn <span>{{ (detail_borrow_ticket$ | async)?.borrow_ticket_name}}</span></h1>
+    <h1 class="font-weight-bold">Thông tin chi tiết phiếu mượn <span>{{ (borrow_ticket_item )?.borrow_ticket_name}}</span></h1>
   </div>
   <ng-container>
     <div class="d-flex flex-row p-5 mb-4">
       <div class="avatar col-3 mb-4">
         <div class="d-flex flex-column flex-app">
-          <img [src]="(detail_borrow_ticket$ | async)?.customer?.image ||'assets/images/default-avatar.png'" style="height: 30rem; width: 20rem; object-fit: cover;" alt="Avatar" />
-          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã phiếu mượn: {{(detail_borrow_ticket$ | async)?.borrow_ticket_id | standardizedId}}</h1>
+          <img [src]="(borrow_ticket_item )?.customer?.image ||'assets/images/default-avatar.png'" style="height: 30rem; width: 20rem; object-fit: cover;" alt="Avatar" />
+          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã phiếu mượn: {{(borrow_ticket_item)?.id | standardizedId}}</h1>
         </div>
       </div>
       <div class=" col-9 d-flex flex-column">
         <div class="d-flex flex-column" >
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Mã phiếu mượn: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_borrow_ticket$ | async)?.borrow_ticket_id | standardizedId ) || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{((borrow_ticket_item )?.id | standardizedId ) || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Khách hàng: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_borrow_ticket$ | async)?.customer?.customer_id | standardizedId) + '  -  ' + (detail_borrow_ticket$ | async)?.customer?.last_name + ' ' + (detail_borrow_ticket$ | async)?.customer?.first_name || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{((borrow_ticket_item )?.customers_id | standardizedId) + ' ' + (borrow_ticket_item)?.customers_name}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Nhân viên: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_borrow_ticket$ | async)?.employee?.employee_id | standardizedId) + '  -  ' + (detail_borrow_ticket$ | async)?.employee?.last_name + ' ' + (detail_borrow_ticket$ | async)?.employee?.first_name || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{((borrow_ticket_item )?.employess_id | standardizedId) + ' - ' +  (borrow_ticket_item)?.employess_name}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Ngày mượn: </b></div>
-            <div class="col-9">{{((detail_borrow_ticket$ | async)?.borrow_date| date: 'dd/MM/yyyy')|| '-'}}</div>
+            <div class="col-9">{{((borrow_ticket_item )?.borrow_date| date: 'dd/MM/yyyy')|| '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Ngày hẹn trả: </b></div>
-            <div class="col-9">{{((detail_borrow_ticket$ | async)?.appointment_date| date: 'dd/MM/yyyy')|| '-'}}</div>
+            <div class="col-9">{{((borrow_ticket_item )?.appointment_date| date: 'dd/MM/yyyy')|| '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Ngày trả: </b></div>
-            <div class="col-9">{{((detail_borrow_ticket$ | async)?.return_date| date: 'dd/MM/yyyy') || '-'}}</div>
+            <div class="col-9">{{((borrow_ticket_item )?.return_date| date: 'dd/MM/yyyy') || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Trạng thái: </b></div>
@@ -44,7 +44,7 @@
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Ghi chú: </b></div>
-            <div class="col-9">{{(detail_borrow_ticket$ | async)?.note || '-'}}</div>
+            <div class="col-9">{{(borrow_ticket_item )?.note || '-'}}</div>
           </div>
         </div>
         <div class="d-flex flex-column">
@@ -83,7 +83,7 @@
       <div class="col text-center text-app" >Nhà cung cấp</div>
     </div>
 
-    <div *ngFor="let borrow_ticket_detail of (detail_borrow_ticket$ | async)?.borrow_ticket_details; let i = index" [attr.data-index]="i" class="item-row pl-0">
+    <div *ngFor="let borrow_ticket_detail of (borrow_ticket_item )?.borrow_ticket_details; let i = index" [attr.data-index]="i" class="item-row pl-0">
       <div class="row">
         <div class="col text-center " style="max-width: 200px" >{{i + 1}}</div>
         <div class="col text-center text-app font-weight-bold" style="max-width: 200px">{{(borrow_ticket_detail.book?.id | standardizedId) || '-'}}</div>

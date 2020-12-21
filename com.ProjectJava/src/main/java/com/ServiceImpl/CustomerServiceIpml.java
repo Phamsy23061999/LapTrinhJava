@@ -188,6 +188,7 @@ public class CustomerServiceIpml implements CustomerService{
 				long millisAppointmentDate = appointment.getTime();
 				long millisReturnDate = return_date.getTime();
 				int date = (int)((millisReturnDate- millisAppointmentDate)/(1000*60*60*24));
+				borrowticket.setReturn_date(return_date);
 				if(millisReturnDate > millisAppointmentDate) {
 					int totalMoney = date * 5000;
 					int ticket = ticketRepository.createBorrowticket(new Date(),totalMoney, borrowticket.getId());
@@ -201,7 +202,6 @@ public class CustomerServiceIpml implements CustomerService{
 					if(borrowTicketsDetail != null) {
 						Books book= bookRepository.getBookById(borrowTicketsDetail.getBook().getId());
 						if(book != null) {
-							borrowticket.setReturn_date(new Date());
 							book.setOld_amount(book.getOld_amount()+1);
 							borrowticket = borrowticketsRepository.save(borrowticket);
 							bookRepository.save(book);
@@ -243,8 +243,12 @@ public class CustomerServiceIpml implements CustomerService{
 						borrowticketResponse.setCustomers_name(customers.getFirst_name());
 					}
 					borrowTicketsResponse.add(borrowticketResponse);
+<<<<<<< HEAD
 					
 					data.put("item", borrowTicketsResponse);
+=======
+					data.put("items", borrowTicketsResponse);
+>>>>>>> 5037a451844f0d9f3f81a6642aa909ee82b657d3
 				}
 				
 			}	

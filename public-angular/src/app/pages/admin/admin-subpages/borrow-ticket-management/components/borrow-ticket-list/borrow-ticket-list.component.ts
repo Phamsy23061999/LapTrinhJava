@@ -36,7 +36,10 @@ export class BorrowTicketListComponent implements OnInit {
     await this.onRequestNewPage()
   }
 
-  onViewBorrowTicketDetail(borrow_ticket_id) {
-    this.router.navigateByUrl(`/admin/borrow-ticket-management/borrow-ticket-detail/${borrow_ticket_id}`);
+  onViewBorrowTicketDetail(borrow_ticket) {
+    this.borrowTicketStore.update({
+      detail_borrow_ticket: borrow_ticket
+    })
+    this.router.navigateByUrl(`/admin/borrow-ticket-management/borrow-ticket-detail/${borrow_ticket.borrow_ticket_id}`);
   }
 }

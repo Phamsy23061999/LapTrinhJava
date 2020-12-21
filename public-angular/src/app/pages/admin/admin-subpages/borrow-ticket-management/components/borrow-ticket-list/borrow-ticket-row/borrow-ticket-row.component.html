@@ -2,14 +2,14 @@
   <div class="row d-flex flex-row">
 
     <div class="col font-weight-bold text-app app-flex flex-column text-center" style="max-width:200px;">
-      {{(borrow_ticket_item?.borrow_ticket_id| standardizedId) || "-"}}
+      {{(borrow_ticket_item?.id| standardizedId) || "-"}}
     </div>
 
     <div class="col font-weight-bold text-app app-flex flex-column text-center" style="max-width:200px;">
-      <div> {{(borrow_ticket_item?.customer?.customer_id | standardizedId)|| "-"}}
+      <div> {{(borrow_ticket_item?.customers_id | standardizedId)|| "-"}}
         <i class="fas fa-external-link-alt external-link-icon"></i>
       </div>
-      <div>{{(borrow_ticket_item?.customer?.last_name) + ' ' + (borrow_ticket_item?.customer?.first_name) || "-"}}
+      <div>{{(borrow_ticket_item?.customers_name)}}
       </div>
     </div>
 
