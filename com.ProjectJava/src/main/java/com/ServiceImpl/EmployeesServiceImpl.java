@@ -112,13 +112,10 @@ public class EmployeesServiceImpl implements EmployeesService{
 		
 		//Lấy số lượng phiếu mượn theo quý trong năm
 		List<JSONObject> count_quarters= new ArrayList<JSONObject>();
-
-		
 		for (int i = 1; i <= 4; i++) {
 			JSONObject count_quarter = new JSONObject();
 			int count = 0;
 			count_quarter.put("quarter" , i);
-
 			for(Borrowtickets bor : allBorrowTicketsInYear) {
 				Date borrow_date = bor.getBorrow_date();
 				int borrow_date_month = borrow_date.getMonth() + 1;
@@ -134,12 +131,28 @@ public class EmployeesServiceImpl implements EmployeesService{
 			count_quarter.put("count" , count);
 			count_quarters.add(count_quarter);
 		}
-		
 		result.put("borrow_ticket_count_each_quarter_in_year", count_quarters);
+		
 		// Lấy phiếu mượn của từng tháng trong năm
-		
-		
-		
+		List<JSONObject>count_month = new ArrayList<JSONObject>();
+		for (int i = 1; i <= 12; i++) {
+			JSONObject count_months = new JSONObject();
+			int count = 0;
+			count_months.put("month", i);
+			for(Borrowtickets bor : allBorrowTicketsInYear) {
+				Date borrow_date = bor.getBorrow_date();
+				int borrow_date_month = borrow_date.getMonth() + 1;
+				List<Integer> month_in_year = new ArrayList<Integer>();
+				month_in_year.add(i);
+				
+				if(month_in_year.contains(borrow_date_month)) {
+					count = count + 1;
+				}
+			}
+			count_months.put("count" , count);
+			count_month.add(count_months);
+		}
+		result.put("borrow_ticket_count_of_each_month_in_year", count_month);
 		
 		// Lấy số lượng phiếu mượn trong ngày
 		JSONObject borrow_tickets_count_in_day = new JSONObject();
@@ -149,70 +162,6 @@ public class EmployeesServiceImpl implements EmployeesService{
 		result.put("borrow_tickets_count_in_day",borrow_tickets_count_in_day);
 		return result;
 	}
-//	@Override
-//	public JSONObject annualStatistics() {
-//		JSONObject data = new JSONObject();
-//		int year = Calendar.getInstance().get(Calendar.YEAR);
-//		JSONObject js = new JSONObject();
-//		List<JSONObject> Statistics_by_year = new ArrayList<JSONObject>();
-//		try {
-//			int quarterlyStatistics = employeesRepository.statisticalYear(year);
-//			if(quarterlyStatistics !=0) {
-//				data.put("label","Statistics_by_year");
-//				data.put("value",quarterlyStatistics);
-//				Statistics_by_year.add(data);
-//				js.put("Statistics_by_year", Statistics_by_year);
-//			}
-//		} catch (Exception e) {
-//			data.put("is_success", false);
-//			data.put("Error","Có Lỗi Xảy Ra");
-//		}
-//		return data;
-//	}
-//
-//	
-//	@Override
-//	public JSONObject quarterlyStatistics() {
-//		JSONObject data = new JSONObject();
-//		JSONObject js = new JSONObject();
-//		int quarterlyStatistics = 0;
-//		List<JSONObject> Statistics_by_year = new ArrayList<JSONObject>();
-//		List<Integer>month = new ArrayList<Integer>();
-//		List<JSONObject> Statistics_by_quarterly = new ArrayList<JSONObject>();
-//		
-//		int year = Calendar.getInstance().get(Calendar.YEAR);
-//		try {
-//			quarterlyStatistics = employeesRepository.quarterlyStatisticsOne(year);
-//				data.put("label","Statistics_by_quarterly_one");
-//				data.put("value",quarterlyStatistics);
-//				Statistics_by_year.add(data);
-//				js.put("Statistics_by_year", Statistics_by_year);
-//			
-//			if(employeesRepository.quarterlyStatisticsTwo(year) == 0 ||  employeesRepository.quarterlyStatisticsTwo(year) != 0) {
-//				data.put("label","Statistics_by_quarterly_two");
-//				data.put("value",employeesRepository.quarterlyStatisticsTwo(year));
-//				Statistics_by_year.add(data);
-//				js.put("Statistics_by_year", Statistics_by_year);
-//			}	
-//			quarterlyStatistics =employeesRepository.quarterlyStatisticsThree(year);
-//				data.put("label","Statistics_by_quarterly_three");
-//				data.put("value",quarterlyStatistics);
-//				Statistics_by_year.add(data);
-//				js.put("Statistics_by_year", Statistics_by_year);
-//			
-//			quarterlyStatistics =employeesRepository.quarterlyStatisticsFour(year);
-//			
-//				data.put("label","Statistics_by_quarterly_four");
-//				data.put("value",quarterlyStatistics);
-//				Statistics_by_year.add(data);
-//				js.put("Statistics_by_year", Statistics_by_year);
-//			
-//		} catch (Exception e) {
-//			data.put("is_success", false);
-//			data.put("Error","Có Lỗi Xảy Ra");
-//		}
-//		return js;
-//	}
 
 	@Override
 	public JSONObject annualStatistics() {

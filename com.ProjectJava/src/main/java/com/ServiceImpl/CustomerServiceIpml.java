@@ -2,6 +2,7 @@ package com.ServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import com.Repository.EmployessRepository;
 import com.Repository.TicketRepository;
 import com.Request.BorrowTicketsRequest;
 import com.Response.BookResponse;
+import com.Response.BorrowTicketDetailResponse;
 import com.Response.BorrowticketResponse;
 import com.Response.CustomerResponse;
 import com.service.CustomerService;
@@ -222,6 +224,7 @@ public class CustomerServiceIpml implements CustomerService{
 		try {
 			List<Borrowtickets> borrowTickets = borrowticketsRepository.getListBorrowtickets();
 			List<BorrowticketResponse> borrowTicketsResponse = new ArrayList<BorrowticketResponse>();
+			BorrowTicketDetailResponse borrowTicketsDetails = new BorrowTicketDetailResponse();
 			
 			if(borrowTickets != null) {
 				for(Borrowtickets borrow : borrowTickets) {
@@ -230,6 +233,9 @@ public class CustomerServiceIpml implements CustomerService{
 					if(employees != null) {
 						borrowticketResponse.setEmployess_id(employees.getId());
 						borrowticketResponse.setEmployess_name(employees.getFirst_name());
+						
+						
+							
 					}
 					Customers customers = customerRepository.getCustomersById(borrow.getCustomers().getId());
 					if(customers != null) {
@@ -237,6 +243,7 @@ public class CustomerServiceIpml implements CustomerService{
 						borrowticketResponse.setCustomers_name(customers.getFirst_name());
 					}
 					borrowTicketsResponse.add(borrowticketResponse);
+					
 					data.put("item", borrowTicketsResponse);
 				}
 				

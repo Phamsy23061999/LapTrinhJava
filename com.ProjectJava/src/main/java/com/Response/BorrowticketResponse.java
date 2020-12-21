@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.Entity.Books;
+import com.Entity.BorrowTicketsDetail;
 import com.Entity.Borrowtickets;
 import com.Entity.Customers;
 import com.Entity.Employees;
@@ -24,7 +26,28 @@ public class BorrowticketResponse {
 	private int customers_id;
 	private String employess_name;
 	private String customers_name;
+	private BorrowTicketsDetail borrowTicketsDetail;
+	private Books books;
 	
+	
+	
+
+	public Books getBooks() {
+		return books;
+	}
+
+	public void setBooks(Books books) {
+		this.books = books;
+	}
+
+	public BorrowTicketsDetail getBorrowTicketsDetail() {
+		return borrowTicketsDetail;
+	}
+
+	public void setBorrowTicketsDetail(BorrowTicketsDetail borrowTicketsDetail) {
+		this.borrowTicketsDetail = borrowTicketsDetail;
+	}
+
 	public BorrowticketResponse() {}
 	
 	public BorrowticketResponse(Borrowtickets borrowtickets) {
@@ -35,6 +58,7 @@ public class BorrowticketResponse {
 		this.appointment_date = borrowtickets.getAppointment_date();
 		this.return_date = borrowtickets.getReturn_date();
 		this.customers_name = borrowtickets.getEmployess().getFirst_name();	
+		
 	}
 	public int getId() {
 		return id;
