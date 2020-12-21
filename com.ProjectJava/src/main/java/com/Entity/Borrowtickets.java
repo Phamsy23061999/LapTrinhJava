@@ -1,6 +1,7 @@
 package com.Entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -43,7 +44,7 @@ public class Borrowtickets {
 	private Customers customers;
 	
 	@OneToMany(mappedBy="borrowtickets")
-	private  Set<BorrowTicketsDetail> borrowTicketsDetails ;
+	private  List<BorrowTicketsDetail> borrowTicketsDetails ;
 	
 	
 
@@ -58,10 +59,10 @@ public class Borrowtickets {
 	public void setCustomers(Customers customers) {
 		this.customers = customers;
 	}
-	public Set<BorrowTicketsDetail> getBorrowTicketsDetails() {
-		return borrowTicketsDetails;
+	public List<BorrowTicketsDetail> getBorrowTicketsDetails() {
+		return this.borrowTicketsDetails;
 	}
-	public void setBorrowTicketsDetails(Set<BorrowTicketsDetail> borrowTicketsDetails) {
+	public void setBorrowTicketsDetails(List<BorrowTicketsDetail> borrowTicketsDetails) {
 		this.borrowTicketsDetails = borrowTicketsDetails;
 	}
 	public Employees getEmployess() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.Entity.Customers;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,9 @@ public interface BorrowticketsRepository extends JpaRepository<Borrowtickets, In
 	
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.id=?1")
 	Borrowtickets getBorrowticketById(int id);
+
+	@Query(nativeQuery = true,value = " SELECT bo.customers From borrowtickets bo Where bo.id=?1")
+	Customers getCustomersByBorrowTicketId(int id);
 
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.delete_at is null group by bo.id")
 	List<Borrowtickets> getListBorrowtickets();

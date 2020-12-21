@@ -6,7 +6,7 @@
     </div>
 
     <div class="col font-weight-bold text-app app-flex flex-column text-center" style="max-width:200px;">
-      <div> {{(borrow_ticket_item?.customers_id | standardizedId)|| "-"}}
+      <div> {{(borrow_ticket_item?.customers?.id | standardizedId)|| "-"}}
         <i class="fas fa-external-link-alt external-link-icon"></i>
       </div>
       <div>{{(borrow_ticket_item?.customers_name)}}

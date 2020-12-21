@@ -3,14 +3,7 @@ package com.Entity;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name="customers")
@@ -34,7 +27,7 @@ public class Customers {
 	private Date expiration_date = addDays(tagdate, 30);
 	
 	
-	@OneToMany(mappedBy="customers")
+	@OneToMany( fetch = FetchType.LAZY, mappedBy="customers")
 	private Set<Borrowtickets>borrowtickets;
 	
 	public Customers() {

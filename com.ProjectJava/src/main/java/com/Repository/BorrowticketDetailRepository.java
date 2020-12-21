@@ -1,6 +1,7 @@
 package com.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -25,6 +26,7 @@ public interface BorrowticketDetailRepository extends JpaRepository<BorrowTicket
 	
 	@Query(nativeQuery = true, value=" SELECT * From borrowtickets_detail bd WHere bd.borrowtickets_id=?1  " )
 	BorrowTicketsDetail getBorrowTicketsDetailByBorrowticketId(int id);
-           
-	
+
+	@Query(nativeQuery = true, value=" SELECT bd.* From borrowtickets_detail bd WHere bd.borrowtickets_id=?1  " )
+	List<BorrowTicketsDetail> getTicketDetailsByTicketId(int id);
 }

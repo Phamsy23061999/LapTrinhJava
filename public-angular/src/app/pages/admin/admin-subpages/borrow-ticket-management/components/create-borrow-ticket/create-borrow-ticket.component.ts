@@ -155,17 +155,18 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
         return toastr.error("Tạo phiếu mượn sách không thành công", "Vui lòng chọn sách mượn");
       }
       const api_req = {
-        customer_id: this.customer_item.id,
-        // employee_id:  JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id,
-        employee_id:  parseInt(this.employee_id),
-        borrow_ids: req_ids
+        customers_id: this.customer_item.id,
+        employess_id:  parseInt(this.employee_id),
+        book_ids: req_ids
       }
       const res = await this.borrowTicketService.CreateBorrowTicket(api_req);
 
-      if(res) {
-        this.confirm_borrow_ticket = res;
+      if(!res.is_success) {
+        toastr.error("Tạo phiếu mượn sách khong thành công", res.msg || res.message);
+      } else {
+        toastr.success("Tạo phiếu mượn sách thành công");
+        this.router.navigateByUrl('admin/borrow-ticket-management/borrow-ticket-list')
       }
-      toastr.success("Tạo phiếu mượn sách thành công");
     } catch(e) {
       toastr.error("Tạo phiếu mượn sách không thành công", e.msg || e.message)
     }

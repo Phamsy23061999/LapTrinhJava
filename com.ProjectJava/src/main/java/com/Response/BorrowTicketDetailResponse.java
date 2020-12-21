@@ -2,16 +2,18 @@ package com.Response;
 
 import com.Entity.BorrowTicketsDetail;
 
+import java.util.List;
+
 public class BorrowTicketDetailResponse {
 	
-	private BorrowTicketsDetail borrowTicketsDetail;
+	private List<BorrowTicketsDetail> borrowTicketsDetails;
 
-	public BorrowTicketsDetail getBorrowTicketsDetail() {
-		return borrowTicketsDetail;
+	public List<BorrowTicketsDetail> getBorrowTicketsDetails() {
+		return this.borrowTicketsDetails;
 	}
 
-	public void setBorrowTicketsDetail(BorrowTicketsDetail borrowTicketsDetail) {
-		this.borrowTicketsDetail = borrowTicketsDetail;
+	public void setBorrowTicketsDetail(List<BorrowTicketsDetail> borrowTicketsDetails) {
+		this.borrowTicketsDetails = borrowTicketsDetails;
 	}
 	
 
