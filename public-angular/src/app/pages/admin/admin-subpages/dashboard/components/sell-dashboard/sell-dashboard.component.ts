@@ -13,24 +13,31 @@ export class SellDashboardComponent implements OnInit {
   constructor(
     private orderQuery: OrderQuery,
     private orderService: OrderService
-  ) { }
+  ) { 
+    google.charts.load('current', {'packages': ['corechart'], 'callback': this.drawChart()});
+    google.charts.load('current', {'packages': ['corechart'], 'callback': this.drawChart2()});
+    google.charts.load('current', {'packages': ['corechart'], 'callback': this.drawChart3()});
+  }
 
   async ngOnInit() {
     this.dashboard = await this.orderService.statistic()
-    google.load("visualization", "1", {packages:["corechart"]});
     await google.setOnLoadCallback(this.drawChart());
-    google.charts.load('current', {'packages':['corechart']});
+    google.load("visualization", "1", {packages:["corechart"], 'callback': this.drawChart()});
+
+    // await google.setOnLoadCallback(this.drawChart3());
+    // google.load("visualization", "1", {packages:["corechart"], 'callback': this.drawChart3()});
+
+    google.charts.load('current', {'packages':['corechart'], 'callback': this.drawChart2()});
     google.charts.setOnLoadCallback(this.drawChart2());
   }
 
 
   convertData(revenues) {
-    let revenueData = [["Ngày", "Doanh thu", {role: "style"}]]
+    let revenueData = [["Tháng", "Số phiếu", {role: "style"}]]
     revenues.forEach(revenue => {
       let revenueItem = []
-      let date = new Date(revenue.date)
-      revenueItem.push(date.getDate() + '-' + (date.getMonth()+1));
-      revenueItem.push(revenue.revenue);
+      revenueItem.push(revenue.month);
+      revenueItem.push(revenue.count);
       revenueItem.push("stroke-width: 100");
       revenueData.push(revenueItem);
     })
@@ -41,8 +48,20 @@ export class SellDashboardComponent implements OnInit {
     let revenueData = [["Tháng", "Doanh thu"]]
     revenues.forEach(revenue => {
       let revenueItem = []
-      revenueItem.push('Tháng '+ revenue.month);
-      revenueItem.push(revenue.revenue);
+      revenueItem.push('Tháng '+ revenue.quarter);
+      revenueItem.push(revenue.count);
+      revenueData.push(revenueItem);
+    })
+    return revenueData;
+  }
+
+  convertData3(revenues) {
+    let revenueData = [["Quý ", "Số phiếu", {role: "style"}]]
+    revenues.forEach(revenue => {
+      let revenueItem = []
+      revenueItem.push(revenue.quarter);
+      revenueItem.push(revenue.count);
+      revenueItem.push("stroke-width: 100");
       revenueData.push(revenueItem);
     })
     return revenueData;
@@ -50,10 +69,10 @@ export class SellDashboardComponent implements OnInit {
 
   async drawChart2() {
     this.dashboard = await this.orderService.statistic()
-    let revenueData = this.convertData2(this.dashboard.revenue_of_each_month_in_year.value)
+    let revenueData = this.convertData2(this.dashboard.borrow_ticket_count_each_quarter_in_year.value)
     var data = google.visualization.arrayToDataTable(revenueData);
     var options = {
-      title: 'Doanh thu theo tháng trong năm',
+      title: 'Số phiếu mượn,trả mỗi quý trong năm',
       curveType: 'function',
       legend: { position: 'bottom' }
     };
@@ -65,7 +84,7 @@ export class SellDashboardComponent implements OnInit {
 
   async drawChart() {
     this.dashboard = await this.orderService.statistic()
-    let revenueData = this.convertData(this.dashboard.revenues_each_day_in_month.value)
+    let revenueData = this.convertData(this.dashboard.borrow_ticket_count_of_each_month_in_year.value)
     var data = google.visualization.arrayToDataTable(revenueData);
 
     var view = new google.visualization.DataView(data);
@@ -78,11 +97,34 @@ export class SellDashboardComponent implements OnInit {
       2]);
 
     var options = {
-      title: "Doanh thu trong tháng",
-      bar: {groupWidth: "75%"},
+      title: "Số phiếu mượn, trả mỗi tháng trong năm",
+      bar: {groupWidth: "100%"},
       legend: { position: "none" },
     };
     var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
     chart.draw(view, options);
+  }
+
+  async drawChart3() {
+    this.dashboard = await this.orderService.statistic()
+    let revenueData3 = this.convertData3(this.dashboard.borrow_ticket_count_each_quarter_in_year.value)
+    var data = google.visualization.arrayToDataTable(revenueData3);
+
+    var view3 = new google.visualization.DataView(data);
+    view3.setColumns([0, 1,
+      { calc: "stringify",
+        sourceColumn: 1,
+        type: "string",
+        role: "annotation",
+      },
+      2]);
+
+    var options3 = {
+      title: "Số phiếu mượn, trả mỗi Quý trong năm",
+      bar: {groupWidth: "100%"},
+      legend: { position: "none" },
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values2"));
+    chart.draw(view3, options3);
   }
 }

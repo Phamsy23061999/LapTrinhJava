@@ -35,13 +35,21 @@ public interface BorrowticketsRepository extends JpaRepository<Borrowtickets, In
 	
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where month(bo.borrow_date)=month(now()) and year(bo.borrow_date)=year(now())")
 	List<Borrowtickets> getBorrowTicketsInMonth();
-	
-	
-	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where  date(bo.borrow_date)=date(now())"
+
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.return_date is null  and  month(bo.borrow_date)=month(now()) and year(bo.borrow_date)=year(now())")
+	List<Borrowtickets> getBorrowingTicketsInMonth();
+
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where  bo.return_date is null and  date(bo.borrow_date)=date(now())"
 			+ " and  month(bo.borrow_date)=month(now())"
 			+ " and year(bo.borrow_date)=year(now())")
 	List<Borrowtickets> getBorrowTicketsInDay();
-	
+
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where  bo.return_date is null and date(bo.borrow_date)=date(now())"
+			+ " and  month(bo.borrow_date)=month(now())"
+			+ " and year(bo.borrow_date)=year(now())")
+	List<Borrowtickets> getBorrowingTicketsInDay();
+
+
 	@Transactional
     @Modifying
 	@Query(nativeQuery = true, value=" INSERT INTO borrowtickets (appointment_date,borrow_date,quantity,customers_id,employees_id) " + 

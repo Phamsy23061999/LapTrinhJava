@@ -101,7 +101,14 @@ public class EmployeesServiceImpl implements EmployeesService{
 		JSONObject result = new JSONObject();
 		List<Borrowtickets> allBorrowTickets = borrowTicketsRepository.getListBorrowtickets();
 		List<Borrowtickets> allBorrowTicketsInYear = borrowTicketsRepository.getListBorrowticketsInYear();
-		
+
+		//Lấy số lượng phiếu dang muon trong tháng
+		JSONObject borrowing_tickets_count_in_month = new JSONObject();
+		List<Borrowtickets> borrowing_tickets_in_month = borrowTicketsRepository.getBorrowingTicketsInMonth();
+		borrowing_tickets_count_in_month.put("label", "return_tickets_count");
+		borrowing_tickets_count_in_month.put("value", borrowing_tickets_in_month.size());
+		result.put("borrowing_tickets_count_in_month",borrowing_tickets_count_in_month);
+
 		//Lấy số lượng phiếu mượn trong tháng
 		JSONObject borrow_tickets_count_in_month = new JSONObject();
 		Date now = new Date();
@@ -119,7 +126,6 @@ public class EmployeesServiceImpl implements EmployeesService{
 			for(Borrowtickets bor : allBorrowTicketsInYear) {
 				Date borrow_date = bor.getBorrow_date();
 				int borrow_date_month = borrow_date.getMonth() + 1;
-				System.out.print("borrow_date_month: " + borrow_date_month);
 				List<Integer> months_in_quarter = new ArrayList<Integer>();
 				months_in_quarter.add(i * 3);
 				months_in_quarter.add(i* 3 - 1);
@@ -131,7 +137,11 @@ public class EmployeesServiceImpl implements EmployeesService{
 			count_quarter.put("count" , count);
 			count_quarters.add(count_quarter);
 		}
-		result.put("borrow_ticket_count_each_quarter_in_year", count_quarters);
+		JSONObject count_quarter_res = new JSONObject();
+		count_quarter_res.put("label", "count_quarter_res");
+		count_quarter_res.put("value", count_quarters);
+
+		result.put("borrow_ticket_count_each_quarter_in_year", count_quarter_res);
 		
 		// Lấy phiếu mượn của từng tháng trong năm
 		List<JSONObject>count_month = new ArrayList<JSONObject>();
@@ -152,8 +162,18 @@ public class EmployeesServiceImpl implements EmployeesService{
 			count_months.put("count" , count);
 			count_month.add(count_months);
 		}
-		result.put("borrow_ticket_count_of_each_month_in_year", count_month);
-		
+		JSONObject borrow_ticket_count_of_each_month_in_year = new JSONObject();
+		borrow_ticket_count_of_each_month_in_year.put("label","borrow_ticket_count_of_each_month_in_year");
+		borrow_ticket_count_of_each_month_in_year.put("value",count_month);
+		result.put("borrow_ticket_count_of_each_month_in_year", borrow_ticket_count_of_each_month_in_year);
+
+		// Lấy số lượng phiếu dang muon trong ngày
+		JSONObject borrowing_tickets_count_in_day = new JSONObject();
+		List<Borrowtickets> borrowing_tickets_in_day = borrowTicketsRepository.getBorrowingTicketsInDay();
+		borrowing_tickets_count_in_day.put("label", "res_return_tickets_count_in_day");
+		borrowing_tickets_count_in_day.put("value", borrowing_tickets_in_day.size());
+		result.put("borrowing_tickets_count_in_day",borrowing_tickets_count_in_day);
+
 		// Lấy số lượng phiếu mượn trong ngày
 		JSONObject borrow_tickets_count_in_day = new JSONObject();
 		List<Borrowtickets> borrow_tickets_in_day = borrowTicketsRepository.getBorrowTicketsInDay();

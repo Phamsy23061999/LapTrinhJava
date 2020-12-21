@@ -61,7 +61,7 @@ public class EmployeesRestController {
 //	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/statistics")
+	@GetMapping("/statistic")
 	public JSONObject statistic() {
 		return employeesService.statistic();
 	}
