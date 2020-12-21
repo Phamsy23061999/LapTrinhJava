@@ -32,7 +32,7 @@ export class ApiBorrowTicketService {
   }
 
   async FinishBorrowTicket(req) {
-    return await this.http.post(this.baseURL+"/admin/borrow-ticket-management/finish-borrow-ticket",req).toPromise();
+    return await this.http.post(this.baseURL+"/admin/customer-management/return-book",req).toPromise();
   }
 
   async SendEmailForLateBorrowTicket(req) {

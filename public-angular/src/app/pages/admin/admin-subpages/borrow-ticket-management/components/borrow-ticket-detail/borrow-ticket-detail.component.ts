@@ -159,7 +159,7 @@ export class BorrowTicketDetailComponent implements OnInit, OnChanges {
       const modal = this.modalController.create({
         component: ConfirmFinishBorrowTicketModalComponent,
         componentProps: {
-          borrow_ticket_id: this.borrowTicketQuery.getValue().detail_borrow_ticket.borrow_ticket_id
+          borrow_ticket_id: this.borrowTicketQuery.getValue().detail_borrow_ticket.id
         },
       });
       modal.show().then();
