@@ -47,10 +47,22 @@ public class EmployeesRestController {
 		return employeesService.deleteEmployees(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/statistics-employee")
-	public JSONObject quarterlyStatistics(@RequestParam int quarterlyLevel) {
-		return employeesService.quarterlyStatistics(quarterlyLevel);
-	}
 	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@GetMapping("/year-statistics-employee")
+//	public JSONObject yearStatistics() {
+//		return employeesService.annualStatistics();
+//	}
+//	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@GetMapping("/quarterly-statistics-employee")
+//	public JSONObject quarterlyStatistics() {
+//		return employeesService.quarterlyStatistics();
+//	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@GetMapping("/statistics")
+	public JSONObject statistic() {
+		return employeesService.statistic();
+	}
 }

@@ -20,9 +20,27 @@ public interface BorrowticketsRepository extends JpaRepository<Borrowtickets, In
 
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.delete_at is null group by bo.id")
 	List<Borrowtickets> getListBorrowtickets();
+	
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.delete_at is null and"
+			+ " year(now())= year(bo.borrow_date) group by bo.id")
+	List<Borrowtickets> getListBorrowticketsInYear();
+	
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo ")
+	List<Borrowtickets> getBorrowtickets();
+	
+	
 
 	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where bo.customers_id=?1")
 	Borrowtickets getBorrowticketByCustomerId(int customers_id);
+	
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where month(bo.borrow_date)=month(now()) and year(bo.borrow_date)=year(now())")
+	List<Borrowtickets> getBorrowTicketsInMonth();
+	
+	
+	@Query(nativeQuery = true,value = " SELECT bo.* From borrowtickets bo Where  date(bo.borrow_date)=date(now())"
+			+ " and  month(bo.borrow_date)=month(now())"
+			+ " and year(bo.borrow_date)=year(now())")
+	List<Borrowtickets> getBorrowTicketsInDay();
 	
 	@Transactional
     @Modifying

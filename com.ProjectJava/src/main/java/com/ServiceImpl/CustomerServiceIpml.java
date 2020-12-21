@@ -135,7 +135,6 @@ public class CustomerServiceIpml implements CustomerService{
 					 int date = (int)((miilisExpiration- millisTag)/(1000*60*60*24));
 					 int borrowDate =(int)((millisAppointment - miliBorrowDate)/(1000*60*60*24));
 
-
 					 borrowtickets2.setBorrow_date(new Date());
 							borrowtickets2.setAppointment_date(addDays(new Date(), 30));
 							borrowtickets2.setQuantity(borrowtickets.getBook_ids().size());

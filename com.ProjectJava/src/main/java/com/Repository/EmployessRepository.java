@@ -29,28 +29,28 @@ public interface EmployessRepository extends JpaRepository<Employees, Integer>{
 			"group by YEAR(borrow_date)")
 	int statisticalYear(int year);
 	
-	@Query(nativeQuery = true, value = "	select count(*) \r\n" + 
-			"    from borrowtickets \r\n" + 
-			"	where month(borrow_date)=1 or month(borrow_date)=2 or month(borrow_date)=3\r\n" + 
+	@Query(nativeQuery = true, value = "	select count(*) " + 
+			"    from borrowtickets " + 
+			"	where (month(borrow_date)=1 or month(borrow_date)=2 or month(borrow_date)=3) and year(borrow_date)=?1 " + 
 			"	group by year(borrow_date)")
-	int quarterlyStatisticsOne();
+	int quarterlyStatisticsOne(int year);
+	
+	@Query(nativeQuery = true, value = "	select count(*) " + 
+			"    from borrowtickets " + 
+			"	where (month(borrow_date)=4 or month(borrow_date)=5 or month(borrow_date)=6)and year(borrow_date)=?1 " + 
+			"	group by year(borrow_date)")
+	int quarterlyStatisticsTwo(int year);
+	
+	@Query(nativeQuery = true, value = "	select count(*) " + 
+			"    from borrowtickets " + 
+			"	where (month(borrow_date)=7 or month(borrow_date)=8 or month(borrow_date)=9) and year(borrow_date)=?1 " + 
+			"	group by year(borrow_date)")
+	int quarterlyStatisticsThree(int year);
 	
 	@Query(nativeQuery = true, value = "	select count(*) \r\n" + 
-			"    from borrowtickets \r\n" + 
-			"	where month(borrow_date)=4 or month(borrow_date)=5 or month(borrow_date)=6\r\n" + 
+			"    from borrowtickets " + 
+			"	where (month(borrow_date)=10 or month(borrow_date)=11 or month(borrow_date)=12) and year(borrow_date)=?1 " + 
 			"	group by year(borrow_date)")
-	int quarterlyStatisticsTwo();
-	
-	@Query(nativeQuery = true, value = "	select count(*) \r\n" + 
-			"    from borrowtickets \r\n" + 
-			"	where month(borrow_date)=7 or month(borrow_date)=8 or month(borrow_date)=9\r\n" + 
-			"	group by year(borrow_date)")
-	int quarterlyStatisticsThree();
-	
-	@Query(nativeQuery = true, value = "	select count(*) \r\n" + 
-			"    from borrowtickets \r\n" + 
-			"	where month(borrow_date)=10 or month(borrow_date)=11 or month(borrow_date)=12\r\n" + 
-			"	group by year(borrow_date)")
-	int quarterlyStatisticsFour();
+	int quarterlyStatisticsFour(int year);
 	
 }

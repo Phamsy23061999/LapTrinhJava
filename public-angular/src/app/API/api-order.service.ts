@@ -40,6 +40,6 @@ export class ApiOrderService {
   }
 
   async statistic() {
-    return await this.http.get(this.baseURL+"/admin/revenue-management").toPromise();
+    return await this.http.get(this.baseURL+"/admin/employee-management/statistic").toPromise();
   }
 }
