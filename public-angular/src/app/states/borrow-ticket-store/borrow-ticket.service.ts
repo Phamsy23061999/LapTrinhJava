@@ -17,7 +17,7 @@ export class BorrowTicketService {
     }
 
     async getBorrowTickets(filter) {
-        let res: GetItemsByPageRsp = await this.borrowTicketApiService.GetBorrowTickets(filter);
+        let res: GetItemsByPageRsp = await this.borrowTicketApiService.GetBorrowTickets(    );
         this.borrowTicketStore.update({
             borrow_ticket_list_view: res,
         })

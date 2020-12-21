@@ -30,11 +30,12 @@ public class BorrowticketResponse {
 	public BorrowticketResponse(Borrowtickets borrowtickets) {
 		this.id=borrowtickets.getId();
 		this.customers_name=borrowtickets.getCustomers().getFirst_name();
+		this.quantity = borrowtickets.getQuantity();
+		this.borrow_date = borrowtickets.getBorrow_date();
+		this.appointment_date = borrowtickets.getAppointment_date();
+		this.return_date = borrowtickets.getReturn_date();
+		this.customers_name = borrowtickets.getEmployess().getFirst_name();	
 	}
-	
-	
-	
-
 	public int getId() {
 		return id;
 	}

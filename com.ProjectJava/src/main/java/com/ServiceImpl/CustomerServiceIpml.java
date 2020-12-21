@@ -21,6 +21,8 @@ import com.Repository.CustomersRepository;
 import com.Repository.EmployessRepository;
 import com.Repository.TicketRepository;
 import com.Request.BorrowTicketsRequest;
+import com.Response.BookResponse;
+import com.Response.BorrowticketResponse;
 import com.Response.CustomerResponse;
 import com.service.CustomerService;
 
@@ -133,7 +135,6 @@ public class CustomerServiceIpml implements CustomerService{
 					 int date = (int)((miilisExpiration- millisTag)/(1000*60*60*24));
 					 int borrowDate =(int)((millisAppointment - miliBorrowDate)/(1000*60*60*24));
 
-
 					 borrowtickets2.setBorrow_date(new Date());
 							borrowtickets2.setAppointment_date(addDays(new Date(), 30));
 							borrowtickets2.setQuantity(borrowtickets.getBook_ids().size());
@@ -218,9 +219,32 @@ public class CustomerServiceIpml implements CustomerService{
 	@Override
 	public JSONObject getBorrowTickets() {
 		JSONObject data = new JSONObject();
-		List<Borrowtickets>  borrowTickets = borrowticketsRepository.getBorrowtickets();
-		System.out.print(borrowTickets);
-		data.put("items", borrowTickets);
+		try {
+			List<Borrowtickets> borrowTickets = borrowticketsRepository.getListBorrowtickets();
+			List<BorrowticketResponse> borrowTicketsResponse = new ArrayList<BorrowticketResponse>();
+			
+			if(borrowTickets != null) {
+				for(Borrowtickets borrow : borrowTickets) {
+					BorrowticketResponse borrowticketResponse = new BorrowticketResponse(borrow);
+					Employees employees = employessRepository.getEmployeesById(borrow.getEmployess().getId());
+					if(employees != null) {
+						borrowticketResponse.setEmployess_id(employees.getId());
+						borrowticketResponse.setEmployess_name(employees.getFirst_name());
+					}
+					Customers customers = customerRepository.getCustomersById(borrow.getCustomers().getId());
+					if(customers != null) {
+						borrowticketResponse.setCustomers_id(customers.getId());
+						borrowticketResponse.setCustomers_name(customers.getFirst_name());
+					}
+					borrowTicketsResponse.add(borrowticketResponse);
+					data.put("items", borrowTicketsResponse);
+				}
+				
+			}	
+		} catch (Exception e) {
+			data.put("is_success", false);
+			data.put("Erorr", "Có lỗi Xảy Ra");
+		}
 		return data;
 	}
 
