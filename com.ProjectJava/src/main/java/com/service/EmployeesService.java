@@ -16,7 +16,8 @@ public interface EmployeesService {
 	public JSONObject findAllEmployees();
 	public JSONObject updateEmployees(Employees employess);
 	public JSONObject deleteEmployees(int id);
-	public JSONObject annualStatistics(int year);
-	public JSONObject quarterlyStatistics(int quarterlyLevel);
-
+	public JSONObject annualStatistics();
+	public JSONObject quarterlyStatistics();
+	
+	public JSONObject statistic();
 }
