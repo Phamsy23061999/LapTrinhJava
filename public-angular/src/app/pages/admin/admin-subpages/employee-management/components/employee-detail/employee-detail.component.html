@@ -7,14 +7,14 @@
       <div class="avatar col-3 mb-4">
         <div class="d-flex flex-column">
           <img src='assets/images/default-book.png' style="height: 100%; width: 100%; object-fit: cover;" alt="Avatar" />
-          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã nhân viên: {{(detail_employee$ | async)?.employee_id | standardizedId}}</h1>
+          <h1 class="text-app text-left font-weight-bold text-center my-4">Mã nhân viên: {{(detail_employee$ | async)?.id | standardizedId}}</h1>
         </div>
       </div>
       <div class=" col-9 d-flex flex-column">
         <div class="d-flex flex-column">
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Mã nhân viên: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_employee$ | async)?.employee_id | standardizedId ) || '-'}}</div>
+            <div class="col-9 text-app font-weight-bold">{{((detail_employee$ | async)?.id | standardizedId ) || '-'}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Tên nhân viên: </b></div>
@@ -33,16 +33,8 @@
             <div class="col-9">{{(detail_employee$ | async)?.phone || "-"}}</div>
           </div>
           <div class="row py-3">
-            <div class="col-2 text-center font-weight-bold"><b>Ngày sinh: </b></div>
-            <div class="col-9">{{(detail_employee$ | async)?.birth_day | date: 'shortDate' || '-'}}</div>
-          </div>
-          <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Địa chỉ: </b></div>
             <div class="col-9">{{(detail_employee$ | async)?.address || '-'}}</div>
-          </div>
-          <div class="row py-3">
-            <div class="col-2 text-center font-weight-bold"><b>Lương cơ sở: </b></div>
-            <div class="col-9 text-app font-weight-bold">{{((detail_employee$ | async)?.basic_rate |vnd)|| "-"}}</div>
           </div>
           <div class="row py-3">
             <div class="col-2 text-center font-weight-bold"><b>Giới tính: </b></div>

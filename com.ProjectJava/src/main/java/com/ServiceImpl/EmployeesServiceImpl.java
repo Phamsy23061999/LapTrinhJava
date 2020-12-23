@@ -51,7 +51,7 @@ public class EmployeesServiceImpl implements EmployeesService{
 					EmployeesResponse res = new EmployeesResponse(employees);
 					employeesResponses.add(res);
 					data.put("is_success",true);
-					data.put("message", employeesResponses);
+					data.put("items", employeesResponses);
 				}
 			}
 		} catch (Exception e) {

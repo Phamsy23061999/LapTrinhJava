@@ -38,7 +38,8 @@ export class EmployeeListComponent implements OnInit {
     await this.onRequestNewPage()
   }
 
-  onViewEmployeeDetail(employee_id) {
-    this.router.navigateByUrl(`/admin/employee-management/employee-detail/${employee_id}`);
+  onViewEmployeeDetail(employee) {
+    this.employeeStore.update({detail_employee: employee});
+    this.router.navigateByUrl(`/admin/employee-management/employee-detail/${employee.id}`);
   }
 }

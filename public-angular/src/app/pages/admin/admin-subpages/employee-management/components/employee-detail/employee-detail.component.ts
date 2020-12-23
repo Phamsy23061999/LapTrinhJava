@@ -60,9 +60,6 @@ export class EmployeeDetailComponent implements OnInit {
     this.employeeService.SetDetailEmployee(detail_employee);
   }
 
-  async ngOnChanges() {
-  }
-
 
   async onClickUpdateBtn() {
     if(this.isEditing) {

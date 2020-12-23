@@ -16,7 +16,7 @@
         </div>
       </div>
       <ng-container *ngFor="let employee_item of (employee_list$ | async)?.items.slice().reverse(), let i = index">
-        <app-employee-row [employee_item]="employee_item" [index]="i" (click)="onViewEmployeeDetail(employee_item.employee_id)"></app-employee-row>
+        <app-employee-row [employee_item]="employee_item" [index]="i" (click)="onViewEmployeeDetail(employee_item)"></app-employee-row>
       </ng-container>
       <app-page-pagination class="mt-auto" (navigate)="navigate($event)" [paginationOpt]="current_pagination_opt$" [currentPage]="current_page$ | async">
       </app-page-pagination>

@@ -148,7 +148,7 @@ public class CustomerServiceIpml implements CustomerService{
 				Books update_book_res = bookRepository.save(book);
 			}
 			borrowticket = borrowticketsRepository.save(borrowticket);
-			
+
 			data.put("is_success", true);
 			data.put("message","Tao Thanh Cong Phieu Muon");
 		} catch (Exception e) {
@@ -226,6 +226,14 @@ public class CustomerServiceIpml implements CustomerService{
 	@Override
 	public JSONObject returnBook(BorrowTicketsRequest borrowTicketsRequest) {
 		JSONObject data = new JSONObject();
+//		try{
+//			Borrowtickets borrowTicket = borrowticketsRepository.getBorrowticketById(borrowTicketsRequest.getId());
+//			if(borrowTicket)
+//		} catch (Exception e) {
+//			data.put("is_success", false);
+//			data.put("msg", e.getMessage());
+//		}
+//		return data;
 		try {
 			Borrowtickets borrowticket = borrowticketsRepository.getBorrowticketById(borrowTicketsRequest.getId());
 			if(borrowticket != null) {

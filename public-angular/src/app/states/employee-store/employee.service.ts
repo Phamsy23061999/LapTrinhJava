@@ -18,7 +18,7 @@ export class EmployeeService {
     }
 
     async GetEmployees(filter) {
-        let res: GetItemsByPageRsp = await this.employeeApiService.GetEmployees(filter);
+        let res: GetItemsByPageRsp = await this.employeeApiService.GetEmployees();
         this.employeeStore.update({
             employee_list_view: res,
         })

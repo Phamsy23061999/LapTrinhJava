@@ -11,8 +11,8 @@ export class ApiEmployeeService {
   constructor(private http: HttpService, private apiAppService: ApiAppService) {
     this.baseURL = this.apiAppService.baseURL;
   }
-  async GetEmployees(req) {
-    return await this.http.post(this.baseURL+"/admin/employee-management/get-employees",req).toPromise();
+  async GetEmployees() {
+    return await this.http.get(this.baseURL+"/admin/employee-management/get-employees").toPromise();
   }
 
   async UpdateEmployee(req) {
