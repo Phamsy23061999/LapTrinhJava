@@ -22,9 +22,7 @@ public interface TicketRepository extends JpaRepository<ticket, Integer>{
 	int createBorrowticket( Date create_at,int fine_money, int borrowtickets_id );
 	
 	@Query(nativeQuery = true, value=" Select * from ticket")
-	List<ticket> getTickets( );
-
-	@Query(nativeQuery = true, value=" Select * from ticket tc where tc.borrowtickets_id =?1")
-	List<ticket> getTicketByBorrowTicketId(int id);
-
+	List<ticket> getTicket(  );
+	
+	
 }

@@ -44,6 +44,12 @@ export class SidebarMenuComponent implements OnInit {
       routerLink: "borrow-ticket-management"
 
     },
+    {
+      iconHtml: `<i class="fa fa-2x fa-ticket" aria-hidden="true"></i>`,
+      itemTitle: "Quản lý phiếu phạt",
+      routerLink: "ticket-management"
+
+    },
   ]
   constructor(
     private router: Router,

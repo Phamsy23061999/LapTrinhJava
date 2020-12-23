@@ -17,7 +17,7 @@ export class EmployeeService {
     constructor(private employeeApiService: ApiEmployeeService, private employeeStore: EmployeeStore, private employeeQuery: EmployeeQuery, private categoryApiService: ApiCategoryService, private authorApiService: ApiAuthorService, private supplierApiService: ApiSupplierService) {
     }
 
-    async GetEmployees(filter) {
+    async GetEmployees() {
         let res: GetItemsByPageRsp = await this.employeeApiService.GetEmployees();
         this.employeeStore.update({
             employee_list_view: res,

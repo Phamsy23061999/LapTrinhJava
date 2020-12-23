@@ -2,14 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff991d1b-8580-46d6-a229-7f0c32fa9c42" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Entity/Borrowtickets.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Entity/Borrowtickets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Repository/TicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Repository/TicketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Rest/TicketRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/Rest/TicketRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/ServiceImpl/CustomerServiceIpml.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/ServiceImpl/CustomerServiceIpml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/ServiceImpl/TicketServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../com.ProjectJava/src/main/java/com/ServiceImpl/TicketServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/API/api-employee.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/API/api-employee.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/dashboard/components/sell-dashboard/sell-dashboard.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/dashboard/components/sell-dashboard/sell-dashboard.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-detail/employee-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-detail/employee-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-detail/employee-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-detail/employee-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-list/employee-list.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-list/employee-list.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-routing.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-routing.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/borrow-ticket-management/components/create-borrow-ticket/create-borrow-ticket.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/borrow-ticket-management/components/create-borrow-ticket/create-borrow-ticket.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/borrow-ticket-management/components/create-borrow-ticket/create-borrow-ticket.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/borrow-ticket-management/components/create-borrow-ticket/create-borrow-ticket.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-list/employee-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin-subpages/employee-management/components/employee-list/employee-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/admin/admin.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pages/components/sidebar-menu/sidebar-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pages/components/sidebar-menu/sidebar-menu.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/states/employee-store/employee.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/states/employee-store/employee.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +40,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -79,7 +84,9 @@
       <updated>1608442026182</updated>
       <workItem from="1608442027531" duration="2334000" />
       <workItem from="1608603589875" duration="44000" />
-      <workItem from="1608732491798" duration="777000" />
+      <workItem from="1608732491798" duration="6419000" />
+      <workItem from="1608775175421" duration="196000" />
+      <workItem from="1608802576668" duration="1032000" />
     </task>
     <servers />
   </component>

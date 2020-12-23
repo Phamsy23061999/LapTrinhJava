@@ -1,0 +1,21 @@
+<div class="table mt-3">
+    <div class="table-header row font-weight-bold text-uppercase ng-star-inserted align-items-center my-3">
+        <div class="col text-center text-app" >Mã phiếu phạt</div>
+        <div class="col text-center text-app">Mã phiếu mượn</div>
+        <div class="col text-center text-app">Tiền phạt</div>
+        <div class="col text-center text-app">Ngày trả</div>
+        <div class="col text-center text-app" >Khách hàng</div>
+    </div>
+</div>
+<ng-container *ngFor="let ticket of tickets">
+    <div class="item-row py-2 " (click)="onViewTicketDetail(ticket.borrowtickets)">
+        <div class="row">
+            <div class="col align-self-center  text-center text-app font-weight-bold">{{ticket?.id | standardizedId}}</div>
+            <div class="col align-self-center text-center text-app "><b>{{(ticket?.borrowtickets?.id | standardizedId) || "-"}}</b></div>
+            <div class="col align-self-center text-center  "><b>{{((ticket?.fine_money | vnd)) || "-"}}</b></div>
+            <div class="col align-self-center text-center  "><b>{{ticket?.create_at | date: 'hh:mm dd/MM/yyyy' || "-"}}</b></div>
+            <div class="col align-self-center text-center text-app font-weight-bold" >{{(ticket?.borrowtickets?.customers?.id | standardizedId) || "-"}} - {{(ticket?.borrowtickets?.customers?.last_name + ' ' + ticket?.borrowtickets?.customers?.first_name) || "-"}}</div>
+        </div>
+    </div>
+
+</ng-container>

@@ -40,6 +40,8 @@ import { CreateBorrowTicketComponent } from './admin-subpages/borrow-ticket-mana
 import {DashboardComponent} from "./admin-subpages/dashboard/dashboard.component";
 import { SellDashboardComponent } from './admin-subpages/dashboard/components/sell-dashboard/sell-dashboard.component';
 import {ShareComponentModule} from "../components/share-component.module";
+import {TicketManagementComponent} from "./admin-subpages/ticket-management/ticket-management.component";
+import {TicketListComponent} from "./admin-subpages/ticket-management/components/ticket-list/ticket-list.component";
 
 const routes: Routes = [
     { path: '', component: AdminComponent, children: [
@@ -47,35 +49,42 @@ const routes: Routes = [
             { path: 'create-book', component: CreateBookComponent},
             { path: 'book-list', component: BookListComponent},
             { path: 'book-detail/:id', component: BookDetailComponent},
-            { path: '', redirectTo: 'book-list',pathMatch: 'full'},
+            { path: '', redirectTo: 'book-list', pathMatch: 'full'},
             { path: '**', redirectTo: 'book-list' },
         ]},
         { path: 'customer-management', component: CustomerManagementComponent, children:[
             { path: 'customer-list', component: CustomerListComponent},
             { path: 'customer-detail/:id', component: CustomerDetailComponent},
-            { path: '', redirectTo: 'customer-list',pathMatch: 'full'},
+            { path: '', redirectTo: 'customer-list', pathMatch: 'full'},
             { path: '**', redirectTo: 'customer-list' },
         ]},
         { path: 'employee-management', component: EmployeeManagementComponent, children:[
             { path: 'employee-list', component: EmployeeListComponent},
             { path: 'employee-detail/:id', component: EmployeeDetailComponent},
-            { path: '', redirectTo: 'employee-list',pathMatch: 'full'},
+            { path: '', redirectTo: 'employee-list', pathMatch: 'full'},
             { path: '**', redirectTo: 'employee-list' },
         ]},
         { path: 'borrow-ticket-management', component: BorrowTicketManagementComponent, children:[
             { path: 'create-borrow-ticket', component: CreateBorrowTicketComponent},
             { path: 'borrow-ticket-list', component: BorrowTicketListComponent},
             { path: 'borrow-ticket-detail/:id', component: BorrowTicketDetailComponent},
-            { path: '', redirectTo: 'borrow-ticket-list',pathMatch: 'full'},
+            { path: '', redirectTo: 'borrow-ticket-list', pathMatch: 'full'},
             { path: '**', redirectTo: 'borrow-ticket-list' },
         ]},
         { path: 'dashboard', component: DashboardComponent, children:[
             { path: 'sell-dashboard', component: SellDashboardComponent},
             { path: 'management-dashboard', component: ManagementDashboardComponent},
-            { path: '', redirectTo: 'sell-dashboard',pathMatch: 'full'},
+            { path: '', redirectTo: 'sell-dashboard', pathMatch: 'full'},
             { path: '**', redirectTo: 'sell-dashboard' },
           ]},
-        { path: '', redirectTo: 'book-management',pathMatch: 'full'},
+            { path: 'ticket-management', component: TicketManagementComponent,
+                children:[
+                    { path: 'ticket-list', component: TicketListComponent},
+                    { path: '', redirectTo: 'ticket-list', pathMatch: 'full'},
+                    { path: '**', redirectTo: 'ticket-list' },
+                ]
+            },
+        { path: '', redirectTo: 'book-management', pathMatch: 'full'},
         { path: '**', redirectTo: 'book-management' },
     ]
     }

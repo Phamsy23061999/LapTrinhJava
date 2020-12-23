@@ -28,14 +28,14 @@ export class EmployeeListComponent implements OnInit {
   }
 
   async onRequestNewPage() {
-    await this.employeeService.GetEmployees(this.employeeQuery.getValue().filter_page).then(() => {
+    await this.employeeService.GetEmployees().then(() => {
       this.employeeService.setupPagination();
     })
   }
 
   async navigate(direction) {
     this.employeeService.navigate(direction);
-    await this.onRequestNewPage()
+    await this.onRequestNewPage();
   }
 
   onViewEmployeeDetail(employee) {

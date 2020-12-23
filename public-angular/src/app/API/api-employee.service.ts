@@ -15,6 +15,10 @@ export class ApiEmployeeService {
     return await this.http.get(this.baseURL+"/admin/employee-management/get-employees").toPromise();
   }
 
+  async getTickets() {
+    return await this.http.get(this.baseURL+"/admin/ticket-management/get-tickets").toPromise().then(res => res.items);
+  }
+
   async UpdateEmployee(req) {
     return await this.http.post(this.baseURL+"/admin/employee-management/update-employee",req).toPromise();
   }

@@ -13,6 +13,9 @@ import { CustomerStore } from './../../../../../../states/customer-store/custome
 import { CustomerQuery } from './../../../../../../states/customer-store/customer.query';
 import { CustomerService } from './../../../../../../states/customer-store/customer.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import {EmployeeService} from "../../../../../../states/employee-store/employee.service";
+import {EmployeeQuery} from "../../../../../../states/employee-store/employee.query";
+import {EmployeeStore} from "../../../../../../states/employee-store/employee.store";
 
 @Component({
   selector: 'app-create-borrow-ticket',
@@ -32,9 +35,15 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
   book_filtered_options: Observable<string[]>;
   book_item: any;
 
+  all_employees = [];
+  employee_control = new FormControl();
+  employee_options: string[] = [];
+  employee_filtered_options: Observable<string[]>;
+  employee_item: any;
   borrowTicket: BorrowTicket =  {
     readerId: '',
     books  : [],
+
   };
 
   employee_id: string;
@@ -51,7 +60,10 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
     private accountStore: AccountStore,
     private accountQuery: AccountQuery,
     private util: UtilService,
-    private router: Router
+    private router: Router,
+    private employeeService: EmployeeService,
+    private employeeQuery: EmployeeQuery,
+    private employeeStore: EmployeeStore
   ) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -65,19 +77,28 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
     });
   }
 
-  filter = {
-    page : 1,
-    per_page: 1000
-  }
-
   async ngOnInit() {
     // this.employee_id = JSON.parse(localStorage.getItem('auth_info')).user_info.employee_id;
 
     await this.customerService.GetCustomers();
     await this.bookService.getBooks();
-
+    await this.employeeService.GetEmployees();
     this.all_books = this.bookQuery.getValue().book_list_view.items;
     this.all_customers = this.customerQuery.getValue().customer_list_view.items;
+    this.all_employees = this.employeeQuery.getValue().employee_list_view.items;
+    console.log(this.all_employees);
+    this.all_employees.forEach(emp => {
+      this.employee_options.push(emp.id.toString());
+    });
+    this.employee_filtered_options = this.employee_control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._employeeFilter(value)),
+        tap(() => {
+          if(parseInt(this.employee_control.value)) {
+            this.employee_item = this.all_employees.find(employee => employee.id == parseInt(this.employee_control.value));
+          }
+        })
+    );
 
     this.all_books.forEach(book => {
       this.book_options.push(book.id.toString());
@@ -92,7 +113,6 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
       })
     );
 
-    console.log(this.all_customers)
     this.all_customers.forEach(customer => {
       this.customer_options.push(customer.id.toString());
     })
@@ -120,6 +140,9 @@ export class CreateBorrowTicketComponent implements OnInit, OnDestroy {
     return this.book_options.filter(book => book.toLowerCase().indexOf(value) === 0);
   }
 
+  private _employeeFilter(value: string): string[] {
+    return this.employee_options.filter(employee => employee.toLowerCase().indexOf(value) === 0);
+  }
   ClearCustomer() {
     this.customer_control.setValue("");
     this.customer_item = null;

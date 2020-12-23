@@ -34,7 +34,6 @@ public class Borrowtickets {
 	private Boolean status;
 	private Date delete_at;
 	private String note;
-	
 	@ManyToOne
 	@JoinColumn(name="employees_id",nullable=false)
 	private Employees employess;
@@ -119,8 +118,8 @@ public class Borrowtickets {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
-	
+
+
+
 
 }

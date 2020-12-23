@@ -27,6 +27,19 @@
           <div class="row app-flex flex-row my-3">
             <div class="col-2 detail-title font-weight-bold text-app">Mã nhân viên: </div>
             <div class="col-10 detail-info d-flex justify-content-center">
+              <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input type="text" placeholder="Mã nhân viên" aria-label="Number" matInput [formControl]="employee_control"
+                         [matAutocomplete]="customerAuto">
+                  <mat-autocomplete autoActiveFirstOption #customerAuto="matAutocomplete">
+                    <mat-option *ngFor="let employee of employee_filtered_options | async" [value]="employee">
+                      {{employee | standardizedId}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </form>
+            </div>
+            <div class="col-10 detail-info d-flex justify-content-center">
               <input type="text" class="form-control text-app font-weight-bold"  placeholder="Nhập ma nhan vien" name="inputField" [(ngModel)]="employee_id" />
             </div>
           </div>

@@ -282,6 +282,7 @@ public class CustomerServiceIpml implements CustomerService{
 				customer.setBorrowtickets(null);
 				borrowTicket.setCustomers(customer);
 				// Gán CHi tiết phiếu mượn vào phiếu mượn
+				List<ticket> tickets = ticketRepository.getTicketByBorrowTicketId(borrowTicket.getId());
 				List<BorrowTicketsDetail> ticketDetails = borrowticketDetailRepository.getTicketDetailsByTicketId(borrowTicket.getId());
 				for(BorrowTicketsDetail ticketDetail: ticketDetails) {
 					ticketDetail.setBorrowtickets(null);
@@ -292,7 +293,7 @@ public class CustomerServiceIpml implements CustomerService{
 			data.put("items", borrowTickets);
 		} catch (Exception e) {
 			data.put("is_success", false);
-			data.put("Erorr", "Có lỗi Xảy Ra");
+			data.put("message", "Có lỗi Xảy Ra");
 		}
 		return data;
 	}
