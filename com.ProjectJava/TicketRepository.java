@@ -23,4 +23,6 @@ public interface TicketRepository extends JpaRepository<ticket, Integer>{
 	
 	@Query(nativeQuery = true, value=" Select * from ticket")
 	List<ticket> getTicket(  );
+	
+	
 }
