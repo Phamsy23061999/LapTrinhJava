@@ -42,6 +42,9 @@ import { SellDashboardComponent } from './admin-subpages/dashboard/components/se
 import {ShareComponentModule} from "../components/share-component.module";
 import {TicketManagementComponent} from "./admin-subpages/ticket-management/ticket-management.component";
 import {TicketListComponent} from "./admin-subpages/ticket-management/components/ticket-list/ticket-list.component";
+import {InventoryManagementComponent} from "./admin-subpages/inventory-management/inventory-management.component";
+import {InventoryListComponent} from "./admin-subpages/inventory-management/components/inventory-list/inventory-list.component";
+import {CreateInventoryComponent} from "./admin-subpages/inventory-management/components/create-inventory/create-inventory.component";
 
 const routes: Routes = [
     { path: '', component: AdminComponent, children: [
@@ -82,6 +85,14 @@ const routes: Routes = [
                     { path: 'ticket-list', component: TicketListComponent},
                     { path: '', redirectTo: 'ticket-list', pathMatch: 'full'},
                     { path: '**', redirectTo: 'ticket-list' },
+                ]
+            },
+            { path: 'inventory-management', component: InventoryManagementComponent,
+                children:[
+                    { path: 'inventory-list', component: InventoryListComponent},
+                    { path: 'create-inventory', component: CreateInventoryComponent},
+                    { path: '', redirectTo: 'inventory-list', pathMatch: 'full'},
+                    { path: '**', redirectTo: 'inventory-list' },
                 ]
             },
         { path: '', redirectTo: 'book-management', pathMatch: 'full'},

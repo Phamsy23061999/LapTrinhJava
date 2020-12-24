@@ -39,15 +39,19 @@ export class SidebarMenuComponent implements OnInit {
       routerLink: "employee-management"
     },
     {
-      iconHtml:`<i class="fa fa-2x fa-ticket" aria-hidden="true"></i>`,
+      iconHtml:`<i class="far fa-2x fa-map"></i>`,
       itemTitle: "Quản lý mượn trả",
       routerLink: "borrow-ticket-management"
-
     },
     {
       iconHtml: `<i class="fa fa-2x fa-ticket" aria-hidden="true"></i>`,
       itemTitle: "Quản lý phiếu phạt",
       routerLink: "ticket-management"
+    },
+    {
+      iconHtml: `<i class="fas fa-2x fa-cart-plus"></i>`,
+      itemTitle: "Quản lý kiểm kho",
+      routerLink: "inventory-management"
 
     },
   ]

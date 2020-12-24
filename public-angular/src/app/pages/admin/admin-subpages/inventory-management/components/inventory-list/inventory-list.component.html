@@ -1,0 +1,23 @@
+<div class="table mt-3">
+    <div class="table-header row font-weight-bold text-uppercase ng-star-inserted align-items-center my-3">
+        <div class="col text-center text-app" >Mã phiếu kiểm kho</div>
+        <div class="col text-center text-app">Mã sách</div>
+        <div class="col text-center text-app">Số lượng cũ</div>
+        <div class="col text-center text-app">Số lượng mới</div>
+        <div class="col text-center text-app" >Chênh lệnh</div>
+        <div class="col text-center text-app" >Trạng thái</div>
+        <div class="col text-center text-app" >Nguyên nhân</div>
+    </div>
+</div>
+<ng-container *ngFor="let inventory of inventories">
+    <div class="item-row py-2 ">
+        <div class="row">
+            <div class="col align-self-center  text-center text-app font-weight-bold">{{inventory?.id | standardizedId}}</div>
+            <div class="col align-self-center text-center text-app "><b>{{(inventory?.borrowtickets?.id | standardizedId) || "-"}}</b></div>
+            <div class="col align-self-center text-center  "><b>{{((inventory?.fine_money | vnd)) || "-"}}</b></div>
+            <div class="col align-self-center text-center  "><b>{{inventory?.create_at | date: 'hh:mm dd/MM/yyyy' || "-"}}</b></div>
+            <div class="col align-self-center text-center text-app font-weight-bold" >{{(inventory?.borrowtickets?.customers?.id | standardizedId) || "-"}} - {{(inventory?.borrowtickets?.customers?.last_name + ' ' + inventory?.borrowtickets?.customers?.first_name) || "-"}}</div>
+        </div>
+    </div>
+
+</ng-container>

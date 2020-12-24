@@ -1,0 +1,57 @@
+<div class="">
+    <div class="d-flex justify-content-center align-items-center text-app font-weight-bold">
+        <h1 class="font-weight-bold">Tạo mới phiếu thống kê</h1>
+    </div>
+    <div class="d-flex flex-row p-5 mb-4">
+        <div class=" col-12 d-flex flex-column">
+            <div class="d-flex flex-column">
+                <div class="row py-3">
+                    <div class="col-2 app-flex"><b>Tên sách: </b></div>
+                    <div class="col-10 detail-info d-flex justify-content-center">
+                        <form class="example-form">
+                            <mat-form-field class="example-full-width">
+                                <input type="text" placeholder="Mã sach" aria-label="Number" matInput [formControl]="book_control"
+                                       [matAutocomplete]="customerAuto">
+                                <mat-autocomplete autoActiveFirstOption #customerAuto="matAutocomplete">
+                                    <mat-option *ngFor="let book of book_filtered_options | async" [value]="book">
+                                        {{book | standardizedId}} - {{book?.book_name}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </form>
+                    </div>
+                    <div class="col-9">
+                        <input type="text" class="form-control" placeholder="Nhập tên sách"
+                        />
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-2 app-flex"><b>Số trang: </b></div>
+                    <div class="col-9">
+                        <input type="number" class="form-control" placeholder="Nhập số trang"
+                        />
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-2 app-flex"><b>Ghi chú: </b></div>
+                    <div class="col-9">
+                        <textarea class="form-control" placeholder="Nhập ghi chú" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <div class="row py-3">
+                    <div class="col-2 app-flex">
+                        <div class="btn btn-outline-app" (click)="goBack()"> <i class="fa fa-arrow-left pr-1" aria-hidden="true">
+                        </i> Quay lại</div>
+                    </div>
+                    <div class="col-9 d-flex flex-row justify-content-end">
+                        <div class="btn-app  align-self-center" (click)="CreateInventory()">
+                            <span>Tạo mới</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
