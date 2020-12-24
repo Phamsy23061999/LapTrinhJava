@@ -14,12 +14,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name ="ticket")
-public class ticket {
+public class Ticket {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	private Date create_at;
 	private Double fine_money;
 	

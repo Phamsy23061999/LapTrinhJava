@@ -33,7 +33,7 @@ public class Books {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "id")
-	private inventory inven;
+	private Inventory inven;
 	
 	
 	
@@ -65,11 +65,11 @@ public class Books {
 		this.category = category;
 	}
 
-	public inventory getInven() {
+	public Inventory getInven() {
 		return inven;
 	}
 
-	public void setInven(inventory inven) {
+	public void setInven(Inventory inven) {
 		this.inven = inven;
 	}
 

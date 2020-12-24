@@ -11,7 +11,7 @@ import com.Entity.BorrowTicketsDetail;
 import com.Entity.Borrowtickets;
 import com.Entity.Customers;
 import com.Entity.Employees;
-import com.Entity.ticket;
+import com.Entity.Ticket;
 import com.Repository.BooksRepository;
 import com.Repository.BorrowticketDetailRepository;
 import com.Repository.BorrowticketsRepository;

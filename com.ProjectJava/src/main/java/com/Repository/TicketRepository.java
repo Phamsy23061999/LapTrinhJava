@@ -10,10 +10,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.Entity.ticket;
+import com.Entity.Ticket;
 
 @Repository
-public interface TicketRepository extends JpaRepository<ticket, Integer>{
+public interface TicketRepository extends JpaRepository<Ticket, Integer>{
 	
 	@Transactional
     @Modifying
@@ -22,5 +22,5 @@ public interface TicketRepository extends JpaRepository<ticket, Integer>{
 	int createBorrowticket( Date create_at,int fine_money, int borrowtickets_id );
 	
 	@Query(nativeQuery = true, value=" Select * from ticket")
-	List<ticket> getTicket(  );
+	List<Ticket> getTicket();
 }
